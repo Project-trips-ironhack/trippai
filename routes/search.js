@@ -16,7 +16,8 @@ router.post('/', (req, res, next) => {
     console.log(arrTagsNotWanted)
 
     Travel.find({$and: [ {days: {$size: numberDays}}, {budget: budget}, {tags: {$all: arrTagsWanted}}, {tags: {$nin: arrTagsNotWanted}} ] })
-    // .then(data => res.render('cities', {data}))
+    .populate('city')
+    .populate('user')
     .then(data => res.json(data))
     .catch(err => console.log(err));
 });

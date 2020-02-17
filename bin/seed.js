@@ -71,7 +71,8 @@ dbConnect(() => {
                     lon: faker.address.longitude()
                 },
                 img: faker.image.abstract(),
-                description: faker.lorem.paragraphs()
+                description: faker.lorem.paragraphs(),
+                total : 0
             }
         })
 
