@@ -1,4 +1,4 @@
-{{!-- <form action="/search" method="post"> --}}
+<form action="/search" method="post">
     <div class='container'>
         <div class='container'>Days</div>
         <div class="field has-addons">
@@ -12,11 +12,12 @@
             </p>
             <p class="control">
                 <button class="button options days" value='5'>
+
                     <span class="is-small">
                         <i class="fa-align-center"></i>
                     </span>
                     <span>5</span>
-                </button>
+                    </li>
             </p>
             <p class="control">
                 <button class="button options days" value='7'>
@@ -86,8 +87,7 @@
             </p>
         </div>
     </div>
-    
-    
+
     <div class='container'>
         <button id='save' class="button is-success">
             <span class="icon is-small">
@@ -96,4 +96,9 @@
             <span>Save</span>
         </button>
     </div>
-{{!-- </form> --}}
+
+    <input id='days' type="hidden" name='days' value=''>
+    <input id='budget' type="hidden" name='budget' value=''>
+    <input id='tagsWanted' type="hidden" name='tagsWanted' value=''>
+    <input id='tagsNotWanted' type="hidden" name='tagsNotWanted' value=''>
+</form>
