@@ -6,22 +6,18 @@ const Day = require("../models/Day");
 const Travel = require("../models/Travel");
 
 router.post('/', (req, res, next) => {
-    const {days, budget, tags} = req.body;
-    const tagsArray = [...tags];
+    const { days, budget, tagsWanted, tagsNotWanted } = req.body;
+    let arrTagsWanted = tagsWanted.split(',')
+    let arrTagsNotWanted = tagsNotWanted.split(',')
+    let numberDays = +days
+    console.log(days)
+    console.log(budget)
+    console.log(arrTagsWanted)
+    console.log(arrTagsNotWanted)
 
-    let tagsWanted = []; 
-    let tagsNotWanted = [];
-
-    tagsArray.forEach(checkbox => {
-        if(checkbox.hasAttribute('checked')) {
-            tagsWanted.push(checkbox.value);
-        } else {
-            tagsNotWanted.push(checkbox.value);
-        }
-    });
-
-    Travel.find({$and: [ {days: {$size: days}}, {budget: budget}, {tags: {$all: tagsWanted}}, {tags: {$nin: tagsNotWanted}} ] })
-    .then(data => res.render('cities', {data}))
+    Travel.find({$and: [ {days: {$size: numberDays}}, {budget: budget}, {tags: {$all: arrTagsWanted}}, {tags: {$nin: arrTagsNotWanted}} ] })
+    // .then(data => res.render('cities', {data}))
+    .then(data => res.json(data))
     .catch(err => console.log(err));
 });
 
