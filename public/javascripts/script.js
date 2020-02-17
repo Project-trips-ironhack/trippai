@@ -45,6 +45,7 @@ function removeClicked() {
   allButtons.forEach(button => {
     button.classList.remove('clicked')
   })
+  buttonClickedArr = []
 
 }
 
