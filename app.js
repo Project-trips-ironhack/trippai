@@ -58,10 +58,14 @@ hbs.registerHelper('ifUndefined', (value, options) => {
       return options.fn(this);
   }
 });
+
+
+hbs.registerPartials(path.join(__dirname, 'views/partials'));
   
 
 // default value for title local
 app.locals.title = 'Express - Generated with IronGenerator';
+
 
 
 // Enable authentication using session + passport
