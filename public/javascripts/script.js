@@ -27,9 +27,9 @@ function buttonClicked(daysButtons, dolarButtons, tagsButtons) {
   dolarButtons.forEach((button) => {
     button.addEventListener('click', function () {
       dolarButtons.forEach((button) => {
-        button.classList.remove('clickedButtons')
+        button.classList.remove('clickedDolar')
       })
-      button.classList.add('clickedButtons')
+      button.classList.add('clickedDolar')
 
     })
   })
@@ -56,11 +56,22 @@ function removeClicked() {
 function firstSave() {
   buttonClicked(daysButtons, dolarButtons, tagsButtons)
   document.querySelector('#save').addEventListener('click', function () {
-    let btnArrTags = document.querySelectorAll('.clickedTags')
+    let btnArrDays = [...document.querySelectorAll('.clickedDays')]
+    let btnArrDolar = [...document.querySelectorAll('.clickedDolar')]
+    let btnArrTags = [...document.querySelectorAll('.clickedTags')]
+
+    btnArrDays.forEach((btn) => {
+      buttonClickedDayArr = +btn.value
+    })
+    btnArrDolar.forEach((btn) => {
+      buttonClickedDolarArr = btn.value
+    })
     btnArrTags.forEach((btn) => {
       buttonClickedTagsArr.push(btn.value)
     })
 
+    console.log(buttonClickedDayArr)
+    console.log(buttonClickedDolarArr)
     console.log(buttonClickedTagsArr)
 
 
