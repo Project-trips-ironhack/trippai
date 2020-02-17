@@ -11,6 +11,9 @@ const citySchema = new Schema({
         lat: Number,
         lon: Number
     },
+    img: {
+        type: String
+    },
     description: String,
 }, {
     timestamps: {

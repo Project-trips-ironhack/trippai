@@ -26,6 +26,10 @@ const travelSchema = new Schema({
         ref: 'User',
         required: true
     },
+    description: {
+        type: String,
+        required: true
+    },
     days: [{
         breakfast: {
             place: String,
