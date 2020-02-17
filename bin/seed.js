@@ -72,7 +72,7 @@ dbConnect(() => {
                 },
                 img: faker.image.abstract(),
                 description: faker.lorem.paragraphs(),
-                total : 0
+                total: 0
             }
         })
 
