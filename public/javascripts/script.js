@@ -7,35 +7,38 @@ document.addEventListener('DOMContentLoaded', () => {
 let allButtons = [...document.querySelectorAll('.options')]
 let daysButtons = [...document.querySelectorAll('.days')]
 let dolarButtons = [...document.querySelectorAll('.dolar')]
-let typeButtons = [...document.querySelectorAll('.type')]
+let tagsButtons = [...document.querySelectorAll('.tags')]
+let buttonClickedDayArr = ''
+let buttonClickedDolarArr = ''
+let buttonClickedTagsArr = []
 let buttonClickedArr = []
 
-function buttonClicked(daysButtons, dolarButtons, typeButtons) {
+function buttonClicked(daysButtons, dolarButtons, tagsButtons) {
   daysButtons.forEach((button, idx, arr) => {
 
     button.addEventListener('click', function () {
       daysButtons.forEach((button) => {
-        button.classList.remove('clicked')
+        button.classList.remove('clickedDays')
       })
-      button.classList.add('clicked')
+      button.classList.add('clickedDays')
 
     })
   })
   dolarButtons.forEach((button) => {
     button.addEventListener('click', function () {
       dolarButtons.forEach((button) => {
-        button.classList.remove('clicked')
+        button.classList.remove('clickedButtons')
       })
-      button.classList.add('clicked')
+      button.classList.add('clickedButtons')
 
     })
   })
-  typeButtons.forEach((button) => {
+  tagsButtons.forEach((button) => {
     button.addEventListener('click', function () {
       if (button.classList.contains('clicked')) {
-        button.classList.remove('clicked')
+        button.classList.remove('clickedTags')
       } else {
-        button.classList.add('clicked')
+        button.classList.add('clickedTags')
       }
     })
   })
@@ -43,20 +46,23 @@ function buttonClicked(daysButtons, dolarButtons, typeButtons) {
 
 function removeClicked() {
   allButtons.forEach(button => {
-    button.classList.remove('clicked')
+    button.classList.remove('clickedTags', 'clickedButtons', 'clickedDays')
   })
   buttonClickedArr = []
+  buttonClickedTagsArr = []
 
 }
 
 function firstSave() {
-  buttonClicked(daysButtons, dolarButtons, typeButtons)
+  buttonClicked(daysButtons, dolarButtons, tagsButtons)
   document.querySelector('#save').addEventListener('click', function () {
-    let btnArr = document.querySelectorAll('.clicked')
-    btnArr.forEach((btn) => {
-      buttonClickedArr.push(btn.value)
+    let btnArrTags = document.querySelectorAll('.clickedTags')
+    btnArrTags.forEach((btn) => {
+      buttonClickedTagsArr.push(btn.value)
     })
-    console.log(buttonClickedArr)
+
+    console.log(buttonClickedTagsArr)
+
 
     removeClicked()
   })
