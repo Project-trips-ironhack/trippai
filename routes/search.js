@@ -5,17 +5,20 @@ const City = require("../models/City");
 const Day = require("../models/Day");
 const Travel = require("../models/Travel");
 
+let numberDays, tripBudget, arrTagsWanted, arrTagsNotWanted; 
+
 router.post('/', (req, res, next) => {
     const { days, budget, tagsWanted, tagsNotWanted } = req.body;
-    let arrTagsWanted = tagsWanted.split(',')
-    let arrTagsNotWanted = tagsNotWanted.split(',')
-    let numberDays = +days
+    arrTagsWanted = tagsWanted.split(',');
+    arrTagsNotWanted = tagsNotWanted.split(',');
+    numberDays = +days;
+    tripBudget = budget;
     console.log(days)
-    console.log(budget)
+    console.log(tripBudget)
     console.log(arrTagsWanted)
     console.log(arrTagsNotWanted)
 
-    Travel.find({$and: [ {days: {$size: numberDays}}, {budget: budget}, {tags: {$all: arrTagsWanted}}, {tags: {$nin: arrTagsNotWanted}} ] })
+    Travel.find({$and: [ {days: {$size: numberDays}}, {budget: tripBudget}, {tags: {$all: arrTagsWanted}}, {tags: {$nin: arrTagsNotWanted}} ] })
     .populate('city')
     .populate('user')
     .then(data => res.json(data))
