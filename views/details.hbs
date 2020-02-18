@@ -1,5 +1,5 @@
 <div class="detailstile tile is-ancestor">
-  <div class="tile is-vertical is-8">
+  <div class="tile is-vertical is-6">
     <div class="tile">
       <div class="tile is-parent is-vertical">
         <figure class="image is-4by3">
@@ -12,14 +12,17 @@
         </article>
       </div>
       <div class="tile is-parent">
-
+        <article class="tile is-child notification is-warning">
+          <p class="title">{{this.city.name}}</p>
+          <p class="subtitle">{{this.city.country}}</p>
+        </article>
       </div>
     </div>
     <div class="tile is-parent">
       <div id="plansMap"></div>
     </div>
   </div>
-  <div class="tile is-parent is-large">
+  <div class="tile is-parent is-6">
     <article class="tile is-child notification is-success">
       <div class="content">
         <p class="title">Days</p>
