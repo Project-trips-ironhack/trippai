@@ -30,7 +30,9 @@ const travelSchema = new Schema({
         type: String,
         required: true
     },
+    numberOfDays: Number,
     days: [{
+        index: Number,
         breakfast: {
             place: String,
             address: String,

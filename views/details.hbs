@@ -1,0 +1,89 @@
+{{#data}}
+
+<div class="detailstile tile is-ancestor">
+  <div class="tile is-vertical is-8">
+    <div class="tile">
+      <div class="tile is-parent is-vertical">
+        <article class="tile is-child notification is-primary">
+          <p class="title">{{this.city.name}}</p>
+          <p class="subtitle">{{this.city.country}}</p>
+          <figure class="image is-4by3">
+            <img src={{this.city.img}}>
+          </figure>
+        </article>
+        <article class="tile is-child notification is-warning">
+          <p class="title">...tiles</p>
+          <p class="subtitle">Bottom tile</p>
+        </article>
+      </div>
+      <div class="tile is-parent">
+        <article class="tile is-child notification is-info">
+          <p class="title">Middle tile</p>
+          <p class="subtitle">With an image</p>
+        </article>
+      </div>
+    </div>
+    {{!-- <div class="tile is-parent">
+        <article class="tile is-child notification is-danger">
+          <p class="title">Wide tile</p>
+          <p class="subtitle">Aligned with the right tile</p>
+          <div class="content">
+            <!-- Content -->
+          </div>
+        </article>
+      </div> --}}
+  </div>
+  <div class="tile is-parent is-large">
+    <article class="tile is-child notification is-success">
+      <div class="content">
+        <p class="title">Days</p>
+        <p class="subtitle">This is your itinerary for each day</p>
+        <div id="tabs-with-content">
+          <div class="tabs is-centered">
+            <ul>
+              {{#each this.days}}
+              <li><a>Days</a></li>
+              {{/each}}
+            </ul>
+          </div>
+          <div>
+            {{#each this.days}}
+            <section class="tab-content">info</section>
+            {{/each}}
+          </div>
+        </div>
+        <div>
+          {{!-- 
+        <div class="content">
+          {{#each this.days}}
+          <div class="title is-3 day">
+            <p class="title is-3 has-text-centered"> Breakfast </p>
+            <p class="title is-4 "><i class="fas fa-utensils"></i> {{this.breakfast.place}}</p>
+            <p class="subtitle is-8"><i class="fas fa-map-marked-alt"></i> {{this.breakfast.address}}</p>
+            <p class="subtitle is-7">{{this.breakfast.description}}</p>
+            <p class="title is-3 has-text-centered"> Lunch </p>
+            <p class="title is-4 "><i class="fas fa-utensils"></i> {{this.lunch.place}}</p>
+            <p class="subtitle is-8"><i class="fas fa-map-marked-alt"></i> {{this.lunch.address}}</p>
+            <p class="subtitle is-7">{{this.lunch.description}}</p>
+            <p class="title is-3 has-text-centered"> Dinner </p>
+            <p class="title is-4 "><i class="fas fa-utensils"></i> {{this.dinner.place}}</p>
+            <p class="subtitle is-8"><i class="fas fa-map-marked-alt"></i> {{this.dinner.address}}</p>
+            <p class="subtitle is-7">{{this.dinner.description}}</p>
+          </div>
+
+          {{/each}}
+        </div> --}}
+        </div>
+    </article>
+  </div>
+</div>
+
+
+
+{{/data}}
+
+
+
+
+</div>
+</div>
