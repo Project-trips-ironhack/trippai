@@ -1,6 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const Travel = require("../models/Travel");
+const City = require("../models/City");
+const User = require("../models/User");
 
 /* GET home page */
 router.get("/", (req, res, next) => {
@@ -81,7 +83,7 @@ router.post('/cities/plans', (req, res, next) => {
 let idDetails;
 router.get('/plans/:id/details', (req, res, next) => {
   idDetails = req.params.id
-  let currentUser = req.user;
+  const currentUser = req.user;
   Travel.findById(idDetails)
     .populate('city')
     .populate('user')
@@ -98,6 +100,31 @@ Travel.findById(idDetails)
   .populate('user')
   .then(data => res.json(data))
   .catch(err => console.log(err));
-})
+});
+
+
+router.get('/users/:id', (req, res, next) => {
+  const currentUser = req.user;
+  User.findById(req.params.id)
+  .then(user => {
+    Travel.find({user: user.id})
+    .populate('city')
+    .then(userPlans => {
+      let owner;
+      user.id === currentUser.id ? owner = true : owner = false;
+      let dataPayload = {user, userPlans, currentUser, owner};
+      res.render('profile', dataPayload)
+    });
+  })
+  .catch(err => console.log(err));
+});
+
+
+router.post('/users/:id/edit', (req, res, next) => {
+  User.findByIdAndUpdate(req.params.id, {$set: {username: req.body.username, email: req.body.email, cityOrigin: req.body.cityOrigin}})
+  .then(res.redirect(`/users/${req.user.id}`))
+  .catch(err => console.log(err));
+});
+
 
 module.exports = router;

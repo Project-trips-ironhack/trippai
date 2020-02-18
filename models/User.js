@@ -6,7 +6,9 @@ const userSchema = new Schema({
   password: String,
   email: String,
   cityOrigin: String,
-  role: {type:String, enum:['admin', 'user'], default: 'user'}
+  role: {type:String, enum:['admin', 'user'], default: 'user'},
+  imgName: {type: String, default: 'imagename'},
+  imgPath: {type: String, default: 'https://res.cloudinary.com/yelpcampagb/image/upload/v1582053793/nalwlnutebmewn76refa.png'}
 }, {
   timestamps: {
     createdAt: 'created_at',
