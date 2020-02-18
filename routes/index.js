@@ -8,21 +8,24 @@ router.get("/", (req, res, next) => {
   res.render("index", { currentUser });
 });
 
-router.get("/cities", (req, res, next) => {
-  Travel.find({
-    $and: [
-      { days: { $size: 2 } },
-      { budget: "💵💵" },
-      { tags: { $all: ["cultural", "party", "cultural"] } },
-      { tags: { $nin: [] } }
-    ]
-  })
-  .populate("city")
-  .populate("user")
-  // .then(data => res.json(data))
+
+router.post("/cities", (req, res, next) => {
+  const { days, budget, tagsWanted, tagsNotWanted } = req.body;
+  arrTagsWanted = tagsWanted.split(',');
+  arrTagsNotWanted = tagsNotWanted.split(',');
+  numberDays = +days;
+  tripBudget = budget;
+  
+  console.log(days)
+  console.log(tripBudget)
+  console.log(arrTagsWanted)
+  console.log(arrTagsNotWanted)
+
+  Travel.find({$and: [ {days: {$size: numberDays}}, {budget: tripBudget}, {tags: {$all: arrTagsWanted}}, {tags: {$nin: arrTagsNotWanted}} ] })
+  .populate('city')
+  .populate('user')
   .then(data => {
     let numberOfTravels = {};
-    let total = "agramenauer"
     let cities = data.map(travel => (travel = travel.city));
     let defCities = cities.filter(city => {
       if (numberOfTravels[city.name]) {
@@ -35,48 +38,39 @@ router.get("/cities", (req, res, next) => {
     });
 
     for (city in numberOfTravels) {
-      console.log("POR AQUI")
       defCities.forEach(city1 =>{
-        console.log("ola")
         if(city1.name === city){
-          console.log("lo encontro")
           city1.total = numberOfTravels[city]
         }
-      })
+      });
     }
 
-    res.json(defCities);
-    // res.render('cities', {cities, travels}))
-  })
+    const searchParams = {days, budget, tagsWanted, tagsNotWanted};
+    let dataPayload = {defCities, searchParams};
 
+    res.render('cities', dataPayload);
+  })
   .catch(err => console.log(err));
 });
 
-router.get('/test', (req, res, next) => {
 
-  Travel.find({
-      $and: [{
-        days: {
-          $size: 5
-        }
-      }, {
-        budget: '💵💵'
-      }, {
-        tags: {
-          $all: ['party', 'relax', 'cultural']
-        }
-      }, {
-        tags: {
-          $nin: []
-        }
-      }]
-    })
+
+router.post('/cities/detail', (req, res, next) => {
+  const { cityId , days, budget, tagsWanted, tagsNotWanted } = req.body;
+  
+  console.log(req.body)
+
+  arrTagsWanted = tagsWanted.split(',');
+  arrTagsNotWanted = tagsNotWanted.split(',');
+  numberDays = +days;
+  tripBudget = budget;
+
+  Travel.find({ $and: [{city: cityId}, {days: {$size: numberDays}}, {budget: tripBudget}, {tags: {$all: arrTagsWanted}}, {tags: {$nin: arrTagsNotWanted}}] })
     .populate('city')
     .populate('user')
-    .then(data => res.render('plans', {
-      data
-    }))
+    .then(dataPayload => res.render('plans', {dataPayload}))
+    .catch(err => console.log(err));
+});
 
-})
 
 module.exports = router;
