@@ -55,7 +55,7 @@ router.post("/cities", (req, res, next) => {
 
 
 
-router.post('/cities/detail', (req, res, next) => {
+router.post('/cities/plans', (req, res, next) => {
   const { cityId , days, budget, tagsWanted, tagsNotWanted } = req.body;
   
   console.log(req.body)
@@ -74,32 +74,12 @@ router.post('/cities/detail', (req, res, next) => {
 
 
 
-router.get('/details', (req, res, next) => {
-
-  Travel.find({
-      $and: [{
-        days: {
-          $size: 5
-        }
-      }, {
-        budget: '💵💵'
-      }, {
-        tags: {
-          $all: ['party', 'relax', 'cultural']
-        }
-      }, {
-        tags: {
-          $nin: []
-        }
-      }]
-    })
+router.get('/plans/:id/details', (req, res, next) => {
+  Travel.findById(req.params.id)
     .populate('city')
     .populate('user')
-    .limit(1)
-    .then(data => res.render('details', {
-      data
-    }))
-
-})
+    .then(data => res.render('details', {data}))
+    .catch(err => console.log(err));
+});
 
 module.exports = router;

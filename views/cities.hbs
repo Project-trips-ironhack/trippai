@@ -1,24 +1,23 @@
 <div class="columns is-multiline">
     
-
     {{#each this.defCities}}
-    
+        
         <div class="column is-half">
             <div class="card">
                 <div class="card-image">
                     <figure class="image is-4by3">
-                    <a class="cityBtn" href='/cities/{{this._id}}'>{{this.name}}><img src="{{this.img}}" alt="Photo of {{this.name}}"></a>
+                        <img src="{{this.img}}" alt="Photo of {{this.name}}">
                     </figure>
                 </div>
                 <div class="card-content">
                     <div class="media">
                         <div class="media-content">
-                            <p class="title is-4"><a href='/cities/{{this._id}}'>{{this.name}}</a><span class="tag is-primary is-light is-medium is-pulled-right">Plans: {{this.total}}</span></p> 
+                            <p class="title is-4">{{this.name}}<span class="tag is-primary is-light is-medium is-pulled-right">Plans: {{this.total}}</span></p> 
                             <p class="subtitle is-6">{{this.country}}</p>
                         </div>
                     </div>
                     <div class="content">{{this.description}}</div>
-                    <form action="/cities/detail" method="POST">
+                    <form action="/cities/plans" method="POST">
                         <input id='days' type="hidden" name='days' value={{../searchParams.days}}>
                         <input id='budget' type="hidden" name='budget' value={{../searchParams.budget}}>
                         <input id='tagsWanted' type="hidden" name='tagsWanted' value={{../searchParams.tagsWanted}}>
@@ -27,9 +26,9 @@
                         <button class="button is-medium is-primary is-fullwidth">View Plans</button>
                     </form>
                 </div>
-            </div>
-            
+            </div>   
         </div>
+
     {{/each}}
 
 </div>

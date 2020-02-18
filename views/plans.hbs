@@ -9,7 +9,7 @@
                     </figure>
                 </div>
                 <div class="media-content">
-                    <p class="title is-4 ">{{this.name}}</p>
+                    <p class="title is-4 "><a href="/plans/{{this._id}}/details">{{this.name}}</a></p>
                     <p class="subtitle is-8">{{this.city.name}}</p>
                     <p class="subtitle is-6">{{this.city.country}}</p>
                     <p class="subtitle is-7">{{this.description}}</p>
@@ -17,12 +17,12 @@
                 </div>
             </div>
             <div class="content">
-                <span class="tag is-white is-medium">{{this.budget}}</span>
-
                 <span class="tag is-primary is-light is-medium">@{{this.user.username}}</span>
                 {{#each this.tags}}
                 <span class="tag is-primary is-medium">{{this}}</span>
                 {{/each}}
+                <span class="tag is-primary is-light is-medium">Days: {{this.numberOfDays}}</span>
+                <span class="tag is-primary is-light is-medium">{{this.budget}}</span>
                 <br>
             </div>
         </div>
