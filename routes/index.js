@@ -101,5 +101,30 @@ router.get('/details', (req, res, next) => {
     }))
 
 })
+router.get('/details/json', (req, res, next) => {
+
+  Travel.find({
+      $and: [{
+        days: {
+          $size: 5
+        }
+      }, {
+        budget: '💵💵'
+      }, {
+        tags: {
+          $all: ['party', 'relax', 'cultural']
+        }
+      }, {
+        tags: {
+          $nin: []
+        }
+      }]
+    })
+    .populate('city')
+    .populate('user')
+    .limit(1)
+    .then(data => res.json(data))
+
+})
 
 module.exports = router;
