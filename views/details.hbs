@@ -1,17 +1,14 @@
-{{#data}}
-
 <div class="detailstile tile is-ancestor">
   <div class="tile is-vertical is-8">
     <div class="tile">
       <div class="tile is-parent is-vertical">
-
         <figure class="image is-4by3">
-          <img src={{this.city.img}}>
+          <img src={{this.planDetails.city.img}}>
         </figure>
 
         <article class="tile is-child notification is-warning">
-          <p class="title">{{this.city.name}}</p>
-          <p class="subtitle">{{this.city.country}}</p>
+          <p class="title">{{this.planDetails.city.name}}</p>
+          <p class="subtitle">{{this.planDetails.city.country}}</p>
         </article>
       </div>
       <div class="tile is-parent">
@@ -30,13 +27,13 @@
         <div id="tabs-with-content">
           <div class="tabs is-centered">
             <ul>
-              {{#each this.days}}
+              {{#each this.planDetails.days}}
               <li><a>Day {{this.index}}</a></li>
               {{/each}}
             </ul>
           </div>
           <div>
-            {{#each this.days}}
+            {{#each this.planDetails.days}}
             <section class="tab-content">
               <div class="title is-3 day">
                 <p class="title is-3 has-text-centered"> Breakfast </p>
@@ -70,6 +67,5 @@
     </article>
   </div>
 </div>
-{{/data}}
 </div>
 </div>

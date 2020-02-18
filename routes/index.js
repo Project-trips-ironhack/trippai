@@ -10,6 +10,7 @@ router.get("/", (req, res, next) => {
 
 
 router.post("/cities", (req, res, next) => {
+  const currentUser = req.user;
   const { days, budget, tagsWanted, tagsNotWanted } = req.body;
   arrTagsWanted = tagsWanted.split(',');
   arrTagsNotWanted = tagsNotWanted.split(',');
@@ -46,7 +47,7 @@ router.post("/cities", (req, res, next) => {
     }
 
     const searchParams = {days, budget, tagsWanted, tagsNotWanted};
-    let dataPayload = {defCities, searchParams};
+    let dataPayload = {defCities, searchParams, currentUser};
 
     res.render('cities', dataPayload);
   })
@@ -56,6 +57,7 @@ router.post("/cities", (req, res, next) => {
 
 
 router.post('/cities/plans', (req, res, next) => {
+  const currentUser = req.user;
   const { cityId , days, budget, tagsWanted, tagsNotWanted } = req.body;
   
   console.log(req.body)
@@ -68,20 +70,25 @@ router.post('/cities/plans', (req, res, next) => {
   Travel.find({ $and: [{city: cityId}, {days: {$size: numberDays}}, {budget: tripBudget}, {tags: {$all: arrTagsWanted}}, {tags: {$nin: arrTagsNotWanted}}] })
     .populate('city')
     .populate('user')
-    .then(dataPayload => res.render('plans', {dataPayload}))
+    .then(plans => {
+      let dataPayload = {plans, currentUser};
+      res.render('plans', dataPayload)
+    })
     .catch(err => console.log(err));
 });
 
 
-let idDetails
+let idDetails;
 router.get('/plans/:id/details', (req, res, next) => {
   idDetails = req.params.id
+  let currentUser = req.user;
   Travel.findById(idDetails)
     .populate('city')
     .populate('user')
-    .then(data => res.render('details', {
-      data
-    }))
+    .then(planDetails => {
+      let dataPayload = {planDetails, currentUser};
+      res.render('details', dataPayload)
+    })
     .catch(err => console.log(err));
 });
 
