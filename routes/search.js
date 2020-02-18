@@ -10,15 +10,14 @@ router.post('/', (req, res, next) => {
     let arrTagsWanted = tagsWanted.split(',')
     let arrTagsNotWanted = tagsNotWanted.split(',')
     let numberDays = +days
-    console.log(days)
-    console.log(budget)
-    console.log(arrTagsWanted)
-    console.log(arrTagsNotWanted)
 
     Travel.find({$and: [ {days: {$size: numberDays}}, {budget: budget}, {tags: {$all: arrTagsWanted}}, {tags: {$nin: arrTagsNotWanted}} ] })
+        .populate('city')
+        .populate('user')
     // .then(data => res.render('cities', {data}))
     .then(data => res.json(data))
     .catch(err => console.log(err));
 });
+
 
 module.exports = router;

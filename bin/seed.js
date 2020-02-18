@@ -30,22 +30,21 @@ dbConnect(() => {
         .map(() => {
             return new mongoose.mongo.ObjectId()
         })
-    
-        const idUser = Array(2)
+
+    const idUser = Array(2)
         .fill()
         .map(() => {
             return new mongoose.mongo.ObjectId()
         })
 
-    let users = [
-        {
+    let users = [{
             _id: idUser[0],
             username: "Arturo",
             password: bcrypt.hashSync("123", bcrypt.genSaltSync(bcryptSalt)),
             email: 'arturo@gmail.com',
             cityOrigin: faker.address.city(),
             role: 'admin'
-            
+
         },
         {
             _id: idUser[1],
@@ -55,7 +54,13 @@ dbConnect(() => {
             cityOrigin: faker.address.city()
         }
     ]
-
+    let imgCityArr = ['https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?ixlib=rb-1.2.1&auto=format&fit=crop&w=3465&q=80',
+        'https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80',
+        'https://images.unsplash.com/photo-1449824913935-59a10b8d2000?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1920&q=80',
+        'https://images.unsplash.com/photo-1495542779398-9fec7dc7986c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1936&q=80',
+        'https://images.unsplash.com/photo-1514565131-fce0801e5785?ixlib=rb-1.2.1&auto=format&fit=crop&w=2532&q=80',
+        'https://images.unsplash.com/photo-1444723121867-7a241cacace9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80'
+    ]
     const fakeCity = Array(6)
         .fill()
         .map(() => {
@@ -70,7 +75,7 @@ dbConnect(() => {
                     lat: faker.address.latitude(),
                     lon: faker.address.longitude()
                 },
-                img: faker.image.abstract(),
+                img: imgCityArr[randomInt(0, imgCityArr.length - 1)],
                 description: faker.lorem.paragraphs()
             }
         })
@@ -89,7 +94,7 @@ dbConnect(() => {
         .then(() => {
             console.log('succesfully added the city to te data')
         })
-    
+
     const dolar = ['💵', '💵💵', '💵💵💵']
     const tags = ['cultural', 'relax', 'party']
     const days = [2, 5, 7]
@@ -150,6 +155,7 @@ dbConnect(() => {
                 }
             })
     }
+
     function fakeTags() {
         function shuffle(array) {
             array.sort(() => Math.random() - 0.5);
@@ -172,7 +178,8 @@ dbConnect(() => {
                 name: faker.lorem.words(),
                 city: idCity[randomInt(0, idCity.length - 1)],
                 user: idUser[randomInt(0, idUser.length - 1)],
-                days: fakeDays()
+                days: fakeDays(),
+                description: faker.lorem.paragraph()
             }
         })
     Travel.deleteMany()
