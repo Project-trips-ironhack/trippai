@@ -76,7 +76,8 @@ dbConnect(() => {
                     lon: faker.address.longitude()
                 },
                 img: imgCityArr[randomInt(0, imgCityArr.length - 1)],
-                description: faker.lorem.paragraphs()
+                description: faker.lorem.paragraphs(),
+                total: 0
             }
         })
 

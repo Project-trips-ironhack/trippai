@@ -15,6 +15,7 @@ const citySchema = new Schema({
         type: String
     },
     description: String,
+    total: Number
 }, {
     timestamps: {
         createdAt: 'created_at',
