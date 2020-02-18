@@ -42,13 +42,28 @@
           <div class="tabs is-centered">
             <ul>
               {{#each this.days}}
-              <li><a>Days</a></li>
+              <li><a>Day {{this.index}}</a></li>
               {{/each}}
             </ul>
           </div>
           <div>
             {{#each this.days}}
-            <section class="tab-content">info</section>
+            <section class="tab-content">
+              <div class="title is-3 day">
+                <p class="title is-3 has-text-centered"> Breakfast </p>
+                <p class="title is-4 "><i class="fas fa-utensils"></i> {{this.breakfast.place}}</p>
+                <p class="subtitle is-8"><i class="fas fa-map-marked-alt"></i> {{this.breakfast.address}}</p>
+                <p class="subtitle is-7">{{this.breakfast.description}}</p>
+                <p class="title is-3 has-text-centered"> Lunch </p>
+                <p class="title is-4 "><i class="fas fa-utensils"></i> {{this.lunch.place}}</p>
+                <p class="subtitle is-8"><i class="fas fa-map-marked-alt"></i> {{this.lunch.address}}</p>
+                <p class="subtitle is-7">{{this.lunch.description}}</p>
+                <p class="title is-3 has-text-centered"> Dinner </p>
+                <p class="title is-4 "><i class="fas fa-utensils"></i> {{this.dinner.place}}</p>
+                <p class="subtitle is-8"><i class= fas fa-map-marked-alt"></i> {{this.dinner.address}}</p>
+                <p class="subtitle is-7">{{this.dinner.description}}</p>
+              </div>
+            </section>
             {{/each}}
           </div>
         </div>
