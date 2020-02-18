@@ -73,13 +73,24 @@ router.post('/cities/plans', (req, res, next) => {
 });
 
 
-
+let idDetails
 router.get('/plans/:id/details', (req, res, next) => {
-  Travel.findById(req.params.id)
+  idDetails = req.params.id
+  Travel.findById(idDetails)
     .populate('city')
     .populate('user')
-    .then(data => res.render('details', {data}))
+    .then(data => res.render('details', {
+      data
+    }))
     .catch(err => console.log(err));
 });
+
+router.get('/plans/details/api', (req, res, next) => {
+Travel.findById(idDetails)
+  .populate('city')
+  .populate('user')
+  .then(data => res.json(data))
+  .catch(err => console.log(err));
+})
 
 module.exports = router;

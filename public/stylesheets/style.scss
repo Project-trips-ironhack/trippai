@@ -14,6 +14,10 @@
 
 }
 
+element.style {
+    position: none;
+
+}
 
 #save {
     margin-top: 15px;
@@ -44,4 +48,10 @@
     display: block;
 
 
+}
+
+#plansMap {
+    
+    width: 100%;
+    height: 100%;
 }
