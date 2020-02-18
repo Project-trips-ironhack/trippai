@@ -1,3 +1,4 @@
+require('dotenv').config()
 const mongoose = require("mongoose");
 const faker = require("faker");
 const randomInt = (min, max) => Math.floor(Math.random() * (max - min + 1) + min);
@@ -6,9 +7,10 @@ const Travel = require('../models/Travel')
 const City = require('../models/City')
 const bcrypt = require("bcrypt");
 const bcryptSalt = 10;
+
 function dbConnect(cb) {
     mongoose
-        .connect("mongodb://localhost/travel", {
+        .connect(`${process.env.DBURL}`, {
             useNewUrlParser: true,
             useUnifiedTopology: true
         })
@@ -99,7 +101,7 @@ dbConnect(() => {
     const tags = ['cultural', 'relax', 'party']
     const days = [2, 5, 7]
     const duration = ['30min-1hour', '1-2 hours', '2-3 hours', '3 or more hours']
-    
+
 
     function fakeDays(counter) {
         let counterDays = 0
@@ -158,7 +160,7 @@ dbConnect(() => {
                     }
                 }
 
-                
+
             })
 
     }
@@ -180,7 +182,7 @@ dbConnect(() => {
         .fill()
         .map(() => {
             daysCounter = days[randomInt(0, days.length - 1)]
-            
+
             return {
                 tags: fakeTags(),
                 budget: dolar[randomInt(0, dolar.length - 1)],
@@ -192,14 +194,14 @@ dbConnect(() => {
                 description: faker.lorem.paragraph()
             }
         })
-    
+
     Travel.deleteMany()
         .then(() => {
-            
+
             return Travel.create(fakeTravel)
         })
         .then(() => {
-            
+
             console.log('succesfully added the travel to te data')
             mongoose.connection.close()
             process.exit(0)
