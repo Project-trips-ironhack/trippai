@@ -16,25 +16,23 @@
 
 }
 
-element.style {
-    position: none;
-
-}
 
 #save {
     margin-top: 15px;
 }
-
-.tile.is-ancestor:not(:last-child) {
-
-    height: 88vh;
-    margin: 1rem;
-
+.detailstile{
+    display: flex;
 }
+// .tile.is-ancestor:not(:last-child) {
 
-.title.is-3 {
-    margin-bottom: 50px;
-}
+//     height: 88vh;
+//     margin: 1rem;
+
+// }
+
+// .title.is-3 {
+//     margin-bottom: 50px;
+// }
 
 // #tabs-with-content .tabs:not(:last-child) {
 //     margin-bottom: 0;
@@ -47,30 +45,54 @@ element.style {
 
 #tabs-with-content .tab-content.is-active {
 
-    display: block;
-
-
+    display: flex;
+}
+.notification{
+    padding: 1rem;
 }
 .footer{
 
     padding: 0;
 }
 
+// .infocard{
+//     padding: 1rem;
+//     margin: 1rem;
+// }
+.containermap{
+    width: 40%;
+}
 
+.dayscard{
+    width: 60%;
+    height: 88%;
+    margin: 0;
+    
+}
 #plansMap {
 
     width: 100%;
-    height: 100%;
+    height: 50%;
 }
+
+.image{
+    width: 53%;
+}
+
 
 #phototile {
     min-height: 0;
-    display: flex;
-    height: auto;
-    margin-bottom: 1rem;
+    // width: 22%;
+    // display: flex;
+    // height: auto;
+    // margin-bottom: 1rem;
 
     .tile {
         min-height: 0;
-        height: 200px
+        // height: 200px
     }
+}
+.columns{
+    display: flex;
+    flex-direction: row;
 }
