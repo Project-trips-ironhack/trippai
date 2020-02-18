@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const User = require("../models/User");
 const City = require("../models/City");
-const Day = require("../models/Day");
+
 const Travel = require("../models/Travel");
 
 let numberDays, tripBudget, arrTagsWanted, arrTagsNotWanted; 

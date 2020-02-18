@@ -18,3 +18,30 @@
 #save {
     margin-top: 15px;
 }
+
+.tile.is-ancestor:not(:last-child) {
+
+    height: 100vh;
+    margin: 1rem;
+
+}
+
+.title.is-3 {
+    margin-bottom: 50px;
+}
+
+#tabs-with-content .tabs:not(:last-child) {
+    margin-bottom: 0;
+}
+
+#tabs-with-content .tab-content {
+    padding: 1rem;
+    display: none;
+}
+
+#tabs-with-content .tab-content.is-active {
+
+    display: block;
+
+
+}

@@ -73,4 +73,33 @@ router.post('/cities/detail', (req, res, next) => {
 });
 
 
+
+router.get('/details', (req, res, next) => {
+
+  Travel.find({
+      $and: [{
+        days: {
+          $size: 5
+        }
+      }, {
+        budget: '💵💵'
+      }, {
+        tags: {
+          $all: ['party', 'relax', 'cultural']
+        }
+      }, {
+        tags: {
+          $nin: []
+        }
+      }]
+    })
+    .populate('city')
+    .populate('user')
+    .limit(1)
+    .then(data => res.render('details', {
+      data
+    }))
+
+})
+
 module.exports = router;
