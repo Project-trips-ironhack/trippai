@@ -1,20 +1,17 @@
 <div class="detailstile tile is-ancestor">
   <div class="tile is-vertical is-6">
-    <div class="tile">
-      <div class="tile is-parent is-vertical">
-        <figure class="image is-4by3">
+    <div id='phototile' class="">
+      <div class="tile is-parent ">
+        <figure class="image">
           <img src={{this.planDetails.city.img}}>
         </figure>
 
-        <article class="tile is-child notification is-warning">
-          <p class="title">{{this.planDetails.city.name}}</p>
-          <p class="subtitle">{{this.planDetails.city.country}}</p>
-        </article>
+
       </div>
       <div class="tile is-parent">
         <article class="tile is-child notification is-warning">
-          <p class="title">{{this.city.name}}</p>
-          <p class="subtitle">{{this.city.country}}</p>
+          <p class="title is-6">{{this.planDetails.city.name}}</p>
+          <p class="subtitle is-6">{{this.planDetails.city.country}}</p>
         </article>
       </div>
     </div>
@@ -22,6 +19,7 @@
       <div id="plansMap"></div>
     </div>
   </div>
+
   <div class="tile is-parent is-6">
     <article class="tile is-child notification is-success">
       <div class="content">
@@ -35,40 +33,54 @@
               {{/each}}
             </ul>
           </div>
-          <div>
-            {{#each this.planDetails.days}}
-            <section class="tab-content">
-              <div class="title is-3 day">
-                <p class="title is-3 has-text-centered"> Breakfast </p>
-                <p class="title is-4 "><i class="fas fa-utensils"></i> {{this.breakfast.place}}</p>
-                <p class="subtitle is-8"><i class="fas fa-map-marked-alt"></i> {{this.breakfast.address}}</p>
-                <p class="subtitle is-7">{{this.breakfast.description}}</p>
-                <p class="title is-3 has-text-centered"> Lunch </p>
-                <p class="title is-4 "><i class="fas fa-utensils"></i> {{this.lunch.place}}</p>
-                <p class="subtitle is-8"><i class="fas fa-map-marked-alt"></i> {{this.lunch.address}}</p>
-                <p class="subtitle is-7">{{this.lunch.description}}</p>
-                <p class="title is-3 has-text-centered"> Dinner </p>
-                <p class="title is-4 "><i class="fas fa-utensils"></i> {{this.dinner.place}}</p>
-                <p class="subtitle is-8"><i class="fas fa-map-marked-alt"></i> {{this.dinner.address}}</p>
-                <p class="subtitle is-7">{{this.dinner.description}}</p>
-                <input id='breakfast' class='place{{this.index}}' type="hidden" name='breakfast'
-                  value='{{this.breakfast.position.lat}}'>
-                <input id='breakfast' class='place{{this.index}}' type="hidden" name='breakfast'
-                  value='{{this.breakfast.position.lon}}'>
-                <input id='lunch' class='place{{this.index}}' type="hidden" name='lunch'
-                  value='{{this.lunch.position}}'>
-                <input id='dinner' class='place{{this.index}}' type="hidden" name='dinner'
-                  value='{{this.dinner.position}}'>
 
-              </div>
-            </section>
-            {{/each}}
-          </div>
-        </div>
-        <div>
+            <div class='columns'>
+              {{#each this.planDetails.days}}
+              <section class="tab-content">
+                <div class='column'>
+                  <div class='box'>
+
+                    <div class="title is-3 day">
+                      <p class="title is-3 has-text-centered"> Breakfast </p>
+                      <p class="title is-4 "><i class="fas fa-utensils"></i> {{this.breakfast.place}}</p>
+                      <p class="subtitle is-8"><i class="fas fa-map-marked-alt"></i> {{this.breakfast.address}}</p>
+                      <p class="subtitle is-7">{{this.breakfast.description}}</p>
+                      <p class="title is-3 has-text-centered"> Lunch </p>
+                      <p class="title is-4 "><i class="fas fa-utensils"></i> {{this.lunch.place}}</p>
+                      <p class="subtitle is-8"><i class="fas fa-map-marked-alt"></i> {{this.lunch.address}}</p>
+                      <p class="subtitle is-7">{{this.lunch.description}}</p>
+                      <p class="title is-3 has-text-centered"> Dinner </p>
+                      <p class="title is-4 "><i class="fas fa-utensils"></i> {{this.dinner.place}}</p>
+                      <p class="subtitle is-8"><i class="fas fa-map-marked-alt"></i> {{this.dinner.address}}</p>
+                      <p class="subtitle is-7">{{this.dinner.description}}</p>
+                    </div>
+                  </div>
+                </div>
+                <div class='column'>
+                  <div class='box'>
+                    <div class="title is-3 day">
+                      <p class="title is-3 has-text-centered"> Breakfast </p>
+                      <p class="title is-4 "><i class="fas fa-utensils"></i> {{this.breakfast.place}}</p>
+                      <p class="subtitle is-8"><i class="fas fa-map-marked-alt"></i> {{this.breakfast.address}}</p>
+                      <p class="subtitle is-7">{{this.breakfast.description}}</p>
+                      <p class="title is-3 has-text-centered"> Lunch </p>
+                      <p class="title is-4 "><i class="fas fa-utensils"></i> {{this.lunch.place}}</p>
+                      <p class="subtitle is-8"><i class="fas fa-map-marked-alt"></i> {{this.lunch.address}}</p>
+                      <p class="subtitle is-7">{{this.lunch.description}}</p>
+                      <p class="title is-3 has-text-centered"> Dinner </p>
+                      <p class="title is-4 "><i class="fas fa-utensils"></i> {{this.dinner.place}}</p>
+                      <p class="subtitle is-8"><i class="fas fa-map-marked-alt"></i> {{this.dinner.address}}</p>
+                      <p class="subtitle is-7">{{this.dinner.description}}</p>
+                    </div>
+
+                  </div>
+                </div>
+              </section>
+              {{/each}}
+            </div>
+
         </div>
     </article>
   </div>
-</div>
-</div>
+
 </div>
