@@ -195,4 +195,10 @@ router.post('/users/:id/edit', uploadCloud.single('user-img'), (req, res, next) 
 });
 
 
+router.get("/test", (req, res, next) => {
+  // const currentUser = req.user;
+  res.render("create");
+});
+
+
 module.exports = router;
