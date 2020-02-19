@@ -5,14 +5,16 @@
   "scripts": {
     "start": "node ./bin/www",
     "dev": "DEBUG=travel:* nodemon ./bin/www",
-    "dev-windows": "nodemon ./bin/www"
+    "dev-windows": "nodemon ./bin/www",
+    "css-build": "node-sass --omit-source-map-url sass/mystyles.scss css/mystyles.css",
+    "css-watch": "npm run css-build -- --watch",
+    "startsass": "npm run css-watch"
   },
   "dependencies": {
     "axios": "^0.19.2",
     "bcrypt": "^3.0.0",
     "body-parser": "^1.18.3",
     "bulma": "^0.8.0",
-    "bulma-start": "0.0.3",
     "cloudinary": "^1.19.0",
     "connect-ensure-login": "^0.1.1",
     "connect-flash": "^0.1.1",

@@ -1,74 +1,99 @@
-<div class="detailstile tile is-ancestor">
-  <div class="tile is-vertical is-6">
-    <div class="tile">
-      <div class="tile is-parent is-vertical">
-        <figure class="image is-4by3">
+<div class="detailstyle">
+  <div class="containermap">
+    <div id='phototile' class='columns is-gapless is-marginless'>
+      <div class="column">
+        <figure class="imagedetails box is-primary">
           <img src={{this.planDetails.city.img}}>
         </figure>
-
-        <article class="tile is-child notification is-warning">
-          <p class="title">{{this.planDetails.city.name}}</p>
-          <p class="subtitle">{{this.planDetails.city.country}}</p>
-        </article>
       </div>
-      <div class="tile is-parent">
-          <article class="tile is-child notification is-warning">
-          <p class="title">{{this.planDetails.city.name}}</p>
-          <p class="subtitle">{{this.planDetails.city.country}}</p>
+      <div class="column">
+        <article class="infocard card notification is-warning">
+          <p class="title is-6">City: {{this.planDetails.city.name}}</p>
+          <p class="subtitle is-6">Country: {{this.planDetails.city.country}}</p>
+          <p class="subtitle is-6">Language: {{this.planDetails.city.language}}</p>
+          <p class="subtitle is-6">Socket: {{this.planDetails.city.socket}}</p>
+          <p class="subtitle is-6">Currency: {{this.planDetails.city.currency}}</p>
         </article>
       </div>
     </div>
-    <div class="tile is-parent">
-      <div id="plansMap"></div>
-    </div>
+    <div id="plansMap"></div>
   </div>
-  <div class="tile is-parent is-6">
-    <article class="tile is-child notification is-success">
-      <div class="content">
-        <p class="title">Days</p>
-        <p class="subtitle">This is your itinerary for each day</p>
-        <div id="tabs-with-content">
-          <div class="tabs is-centered">
-            <ul>
-              {{#each this.planDetails.days}}
-              <li><a>Day {{this.index}}</a></li>
-              {{/each}}
-            </ul>
-          </div>
-          <div>
-            {{#each this.planDetails.days}}
-            <section class="tab-content">
+
+  <div class="dayscard notification is-success is-pulled-rigth">
+    <p class="title">Daily schedule</p>
+    <p class="subtitle">This is your itinerary for each day</p>
+    <div id="tabs-with-content">
+      <div class="tabs is-centered">
+        <ul>
+          {{#each this.planDetails.days}}
+          <li><a>Day {{this.index}}</a></li>
+          {{/each}}
+        </ul>
+      </div>
+
+      <div class='columns columnsday'>
+        {{#each this.planDetails.days}}
+        <section class="tab-content">
+          <div class='column'>
+            <div class='box'>
+
               <div class="title is-3 day">
-                <p class="title is-3 has-text-centered"> Breakfast </p>
-                <p class="title is-4 "><i class="fas fa-utensils"></i> {{this.breakfast.place}}</p>
-                <p class="subtitle is-8"><i class="fas fa-map-marked-alt"></i> {{this.breakfast.address}}</p>
-                <p class="subtitle is-7">{{this.breakfast.description}}</p>
-                <p class="title is-3 has-text-centered"> Lunch </p>
-                <p class="title is-4 "><i class="fas fa-utensils"></i> {{this.lunch.place}}</p>
-                <p class="subtitle is-8"><i class="fas fa-map-marked-alt"></i> {{this.lunch.address}}</p>
-                <p class="subtitle is-7">{{this.lunch.description}}</p>
-                <p class="title is-3 has-text-centered"> Dinner </p>
-                <p class="title is-4 "><i class="fas fa-utensils"></i> {{this.dinner.place}}</p>
-                <p class="subtitle is-8"><i class="fas fa-map-marked-alt"></i> {{this.dinner.address}}</p>
-                <p class="subtitle is-7">{{this.dinner.description}}</p>
-                <input id='breakfast' class='place{{this.index}}' type="hidden" name='breakfast'
-                  value='{{this.breakfast.position.lat}}'>
-                <input id='breakfast' class='place{{this.index}}' type="hidden" name='breakfast'
-                  value='{{this.breakfast.position.lon}}'>
-                <input id='lunch' class='place{{this.index}}' type="hidden" name='lunch'
-                  value='{{this.lunch.position}}'>
-                <input id='dinner' class='place{{this.index}}' type="hidden" name='dinner'
-                  value='{{this.dinner.position}}'>
+                <div class="dayschedule box">
+
+                  <p class="title is-3 has-text-centered"> Morning </p>
+                  {{#each this.morning}}
+                  <p class="title is-4 "></i> {{this.place}}</p>
+                  <p class="subtitle is-6 "><i class="fas fa-clock"></i></i> {{this.duration}}</p>
+                  <p class="subtitle is-5"><i class="fas fa-map-marked-alt"></i> {{this.address}}</p>
+                  <p class="subtitle is-6">{{this.description}}</p>
+                  {{/each}}
+                </div>
+                <div class="dayschedule box">
+                  <p class="title is-3 has-text-centered"> Afternoon </p>
+
+                  {{#each this.afternoon}}
+                  <p class="title is-4 "></i> {{this.place}}</p>
+                  <p class="subtitle is-6 "><i class="fas fa-clock"></i></i> {{this.duration}}</p>
+                  <p class="subtitle is-5"><i class="fas fa-map-marked-alt"></i> {{this.address}}</p>
+                  <p class="subtitle is-6">{{this.description}}</p>
+                  {{/each}}
+                </div>
+
 
               </div>
-            </section>
-            {{/each}}
+            </div>
           </div>
-        </div>
-        <div>
-        </div>
-    </article>
+          <div class='column'>
+            <div class='box'>
+              <div class="">
+                <div class="box">
+                  <p class="title is-3 has-text-centered"> Breakfast </p>
+                  <p class="title is-4 "><i class="fas fa-utensils"></i> {{this.breakfast.place}}</p>
+                  <p class="subtitle is-8"><i class="fas fa-map-marked-alt"></i> {{this.breakfast.address}}</p>
+                  <p class="subtitle is-6">{{this.breakfast.description}}</p>
+                </div>
+                <div class="box">
+                  <p class="title is-3 has-text-centered"> Lunch </p>
+                  <p class="title is-4 "><i class="fas fa-utensils"></i> {{this.lunch.place}}</p>
+                  <p class="subtitle is-8"><i class="fas fa-map-marked-alt"></i> {{this.lunch.address}}</p>
+                  <p class="subtitle is-6">{{this.lunch.description}}</p>
+                </div>
+                <div class="box">
+                  <p class="title is-3 has-text-centered"> Dinner </p>
+                  <p class="title is-4 "><i class="fas fa-utensils"></i> {{this.dinner.place}}</p>
+                  <p class="subtitle is-8"><i class="fas fa-map-marked-alt"></i> {{this.dinner.address}}</p>
+                  <p class="subtitle is-7">{{this.dinner.description}}</p>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </section>
+        {{/each}}
+      </div>
+
+    </div>
   </div>
-</div>
-</div>
+
+
 </div>
