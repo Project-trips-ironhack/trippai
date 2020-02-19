@@ -1,0 +1,82 @@
+<div id="newtrip">
+    <div>
+                    <div class="field">
+                        <label class="label">Name</label>
+                        <div class="control">
+                            <input id="travelName1Tab" class="input" type="text" placeholder="Name of the plan">
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label class="label">City</label>
+                        <div class="control">
+                            <div class="select">
+                            <select id="travelCity1Tab">
+                                {{#each allCities}}
+                                <option value="{{this._id}}">{{this.name}}</option>
+                                {{/each}}
+                            </select>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="field">
+                        <label class="label">Description</label>
+                        <div class="control">
+                            <textarea id="travelDescription1Tab" class="textarea"
+                                placeholder="Describe you plan here"></textarea>
+                        </div>
+                    </div>
+
+
+                    <div class="field">
+                        <label class="label">Budget</label>
+                        <div class="control">
+                            <div class="select">
+                                <select id="travelBudget1Tab">
+                                    <option value="💵">💵</option>
+                                    <option value="💵💵">💵💵</option>
+                                    <option value="💵💵💵">💵💵💵</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label class="label">Type</label>
+                        <div class="control">
+                            <div class="select">
+                                <select id="travelType1Tab">
+                                    <option value="cultural">Cultural</option>
+                                    <option value="relax">Relax</option>
+                                    <option value="party">Party</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label class="label">Days</label>
+                        <div class="control">
+                            <div class="select">
+                                <select id="travelDays1Tab">
+                                    <option value="2">2</option>
+                                    <option value="5">5</option>
+                                    <option value="7">7</option>
+                                </select>
+                            </div>
+                        </div>
+                    </select>
+                </div>
+                </div>
+
+
+    <div id="tabs-with-content">
+        <div class="tabs is-centered">
+            <ul>
+
+            </ul>
+        </div>
+        <div id='contentsDiv'>
+          
+        </div>
+    </div>
+</div>
