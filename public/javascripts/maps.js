@@ -27,17 +27,22 @@ function getRestaurants() {
 
 
 function placeRestaurantsInMap(restaurants) {
-    console.log(restaurants)
-        let days = restaurants.days
+
+    let days = restaurants.days
+
+    
 
 
-        days.forEach((day) => {
-            console.log(day.breakfast.position)
+    days.forEach((day, idx) => {
+            console.log(`${day.breakfast.position.lat} index ${idx}`)
+            
+        
+        
+        
             const center = {
                 lat: day.breakfast.position.lat,
                 lng: day.breakfast.position.lon
             }
-            console.log(center)
             new google.maps.Marker({
                 position: center,
                 map: myMap,
