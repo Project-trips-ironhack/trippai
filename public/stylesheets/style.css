@@ -10621,7 +10621,11 @@ a.navbar-item,
 
 #plansMap {
   width: 100%;
+<<<<<<< HEAD
   height: 71.5%; }
+=======
+  height: 100%; }
+>>>>>>> 5fcaced3f50907d05b9498ff25ed7f31a74d0643
 
 .auth-message {
   margin-top: 2rem; }

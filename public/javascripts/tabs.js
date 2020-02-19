@@ -33,3 +33,6 @@ let tabsWithContent = (function () {
 
     tabs[0].click();
 })();
+
+
+

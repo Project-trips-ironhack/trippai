@@ -4,7 +4,7 @@ const Travel = require("../models/Travel");
 const City = require("../models/City");
 const User = require("../models/User");
 const uploadCloud = require('../configs/cloudinary.js');
-
+const axios = require('axios');
 /* GET home page */
 router.get("/", (req, res, next) => {
   const currentUser = req.user;
@@ -194,6 +194,45 @@ router.post('/users/:id/edit', uploadCloud.single('user-img'), (req, res, next) 
   }
 });
 
+router.get("/test", (req, res, next) => {
+  // const currentUser = req.user;
+  axios.get('https://restcountries.eu/rest/v2/all')
+  .then(allCountries=>{
+   // console.log(allCountries)
+   let countries = []
+
+   
+    // let countries = []
+    allCountries.data.forEach(country => {
+      let tempCountry = {
+        name : country.name,
+        code : country.alpha2Code,
+        capital: country.capital
+      }
+     countries.push(tempCountry) 
+    })
+    res.render("create", {countries});
+
+
+    //https://restcountries.eu/rest/v2/name/{name}
+  })
+  
+});
+
+
+router.get("/test2", (req, res, next) => {
+  // const currentUser = req.user;
+    City.find()
+    .then(allCities =>{
+      console.log(allCities)
+      res.render("create",{allCities} )
+    })
+
+
+    //https://restcountries.eu/rest/v2/name/{name}
+  
+  
+});
 
 router.get("/test", (req, res, next) => {
   // const currentUser = req.user;
