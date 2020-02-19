@@ -10,9 +10,12 @@ swag.registerHelpers(hbs);
 const mongoose     = require('mongoose');
 const logger       = require('morgan');
 const path         = require('path');
-const session    = require("express-session");
-const MongoStore = require('connect-mongo')(session);
-const flash      = require("connect-flash");
+const session      = require("express-session");
+const passport     = require("passport");
+const googleStrategy = require('passport-google-oauth20').Strategy;
+const MongoStore   = require('connect-mongo')(session);
+const flash        = require("connect-flash");
+const User = require('./models/User');
     
 
 mongoose
@@ -68,6 +71,37 @@ hbs.registerPartials(path.join(__dirname, 'views/partials'));
 app.locals.title = 'Express - Generated with IronGenerator';
 
 
+// Passport Google Auth config
+const GoogleStrategy = require("passport-google-oauth20").Strategy;
+
+passport.use(
+  new googleStrategy(
+    {
+      clientID: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+      callbackURL: '/auth/google/callback'
+    },
+    (accessToken, refreshToken, profile, done) => {
+      // to see the structure of the data in received response:
+      console.log("Google account details:", profile);
+
+      User.findOne({ googleID: profile.id })
+        .then(user => {
+          if (user) {
+            done(null, user);
+            return;
+          }
+
+          User.create({ googleID: profile.id, username: profile.name.givenName, email: profile.emails[0].value, imgPath: profile.photos[0].value })
+            .then(newUser => {
+              done(null, newUser);
+            })
+            .catch(err => done(err)); // closes User.create()
+        })
+        .catch(err => done(err)); // closes User.findOne()
+    }
+  )
+);
 
 // Enable authentication using session + passport
 app.use(session({

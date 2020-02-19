@@ -3,6 +3,7 @@ const router = express.Router();
 const Travel = require("../models/Travel");
 const City = require("../models/City");
 const User = require("../models/User");
+const uploadCloud = require('../configs/cloudinary.js');
 
 /* GET home page */
 router.get("/", (req, res, next) => {
@@ -18,11 +19,6 @@ router.post("/cities", (req, res, next) => {
   arrTagsNotWanted = tagsNotWanted.split(',');
   numberDays = +days;
   tripBudget = budget;
-  
-  console.log(days)
-  console.log(tripBudget)
-  console.log(arrTagsWanted)
-  console.log(arrTagsNotWanted)
 
   Travel.find({$and: [ {days: {$size: numberDays}}, {budget: tripBudget}, {tags: {$all: arrTagsWanted}}, {tags: {$nin: arrTagsNotWanted}} ] })
   .populate('city')
@@ -61,8 +57,6 @@ router.post("/cities", (req, res, next) => {
 router.post('/cities/plans', (req, res, next) => {
   const currentUser = req.user;
   const { cityId , days, budget, tagsWanted, tagsNotWanted } = req.body;
-  
-  console.log(req.body)
 
   arrTagsWanted = tagsWanted.split(',');
   arrTagsNotWanted = tagsNotWanted.split(',');
@@ -107,12 +101,18 @@ router.get('/users/:id', (req, res, next) => {
   const currentUser = req.user;
   User.findById(req.params.id)
   .then(user => {
-    Travel.find({user: user.id})
+    let userFound = user
+    Travel.find({user: user._id})
     .populate('city')
-    .then(userPlans => {
+  .then(userPlans => {
       let owner;
-      user.id === currentUser.id ? owner = true : owner = false;
-      let dataPayload = {user, userPlans, currentUser, owner};
+      
+      currentUser ? 
+        userFound.id === currentUser.id 
+        ? owner = true 
+        : owner = false 
+      : owner = false
+      let dataPayload = {userFound, userPlans, currentUser, owner};
       res.render('profile', dataPayload)
     });
   })
@@ -120,10 +120,16 @@ router.get('/users/:id', (req, res, next) => {
 });
 
 
-router.post('/users/:id/edit', (req, res, next) => {
-  User.findByIdAndUpdate(req.params.id, {$set: {username: req.body.username, email: req.body.email, cityOrigin: req.body.cityOrigin}})
-  .then(res.redirect(`/users/${req.user.id}`))
-  .catch(err => console.log(err));
+router.post('/users/:id/edit', uploadCloud.single('user-img'), (req, res, next) => {
+  if(req.file) {
+    User.findByIdAndUpdate(req.params.id, {$set: {username: req.body.username, email: req.body.email, cityOrigin: req.body.cityOrigin, imgPath: req.file.url}})
+    .then(res.redirect(`/users/${req.user.id}`))
+    .catch(err => console.log(err));
+  } else {
+    User.findByIdAndUpdate(req.params.id, {$set: {username: req.body.username, email: req.body.email, cityOrigin: req.body.cityOrigin}})
+    .then(res.redirect(`/users/${req.user.id}`))
+    .catch(err => console.log(err));
+  }
 });
 
 
