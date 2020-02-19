@@ -12,6 +12,7 @@ router.get("/login", (req, res, next) => {
   res.render("auth/login", { "message": req.flash("error") });
 });
 
+
 router.post("/login", passport.authenticate("local", {
   successRedirect: "/",
   failureRedirect: "/auth/login",
@@ -19,13 +20,13 @@ router.post("/login", passport.authenticate("local", {
   passReqToCallback: true
 }));
 
+
 router.get("/signup", (req, res, next) => {
   res.render("auth/signup");
 });
 
-router.post("/signup", (req, res, next) => {
-  console.log(req.body);
 
+router.post("/signup", (req, res, next) => {
   const username = req.body.username;
   const password = req.body.password;
   if (username === "" || password === "") {
@@ -60,9 +61,30 @@ router.post("/signup", (req, res, next) => {
   });
 });
 
+
 router.get("/logout", (req, res) => {
   req.logout();
   res.redirect("/");
 });
+
+
+router.get(
+  "/google",
+  passport.authenticate("google", {
+    scope: [
+      "https://www.googleapis.com/auth/userinfo.profile",
+      "https://www.googleapis.com/auth/userinfo.email"
+    ]
+  })
+);
+
+router.get(
+  "/google/callback",
+  passport.authenticate("google", {
+    successRedirect: "/",
+    failureRedirect: "/signup" // here you would redirect to the login page using traditional login approach
+  })
+);
+
 
 module.exports = router;

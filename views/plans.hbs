@@ -17,9 +17,9 @@
                 </div>
             </div>
             <div class="content">
-                <span class="tag is-primary is-light is-medium">@{{this.user.username}}</span>
+                <a href="/users/{{this.user._id}}" class="tag is-primary is-light is-medium">@{{this.user.username}}</a>
                 {{#each this.tags}}
-                <span class="tag is-primary is-medium">{{this}}</span>
+                    <span class="tag is-primary is-medium">{{this}}</span>
                 {{/each}}
                 <span class="tag is-primary is-light is-medium">Days: {{this.numberOfDays}}</span>
                 <span class="tag is-primary is-light is-medium">{{this.budget}}</span>
