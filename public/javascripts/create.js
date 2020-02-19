@@ -74,8 +74,6 @@ btnCreate.addEventListener("change", function(e) {
   let tabsList = document.querySelector(".tabs ul");
   let contentsDiv = document.querySelector("#contentsDiv");
  
-  // console.log("ola")
-//   tabsWithContent()
   generateTab(daySelection.value, tabsList, contentsDiv);
 });
 
