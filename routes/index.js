@@ -12,6 +12,41 @@ router.get("/", (req, res, next) => {
 });
 
 
+router.get('/cities', (req, res, next) => {
+  const currentUser = req.user;
+
+  Travel.find({})
+  .populate('city')
+  .populate('user')
+  .then(data => {
+    let numberOfTravels = {};
+    let cities = data.map(travel => (travel = travel.city));
+    let defCities = cities.filter(city => {
+      if (numberOfTravels[city.name]) {
+        numberOfTravels[city.name] += 1;
+        return false;
+      } else {
+        numberOfTravels[city.name] = 1;
+        return true;
+      }
+    });
+
+    for (city in numberOfTravels) {
+      defCities.forEach(city1 =>{
+        if(city1.name === city){
+          city1.total = numberOfTravels[city]
+        }
+      });
+    }
+
+    let dataPayload = {defCities, currentUser};
+
+    res.render('cities', dataPayload);
+  })
+  .catch(err => console.log(err));
+});
+
+
 router.post("/cities", (req, res, next) => {
   const currentUser = req.user;
   const { days, budget, tagsWanted, tagsNotWanted } = req.body;
@@ -53,6 +88,19 @@ router.post("/cities", (req, res, next) => {
 });
 
 
+router.get('/cities/:id/plans', (req, res, next) => {
+  const currentUser = req.user;
+
+  Travel.find({city: req.params.id})
+    .populate('city')
+    .populate('user')
+    .then(plans => {
+      let dataPayload = {plans, currentUser};
+      res.render('plans', dataPayload)
+    })
+    .catch(err => console.log(err));
+});
+
 
 router.post('/cities/plans', (req, res, next) => {
   const currentUser = req.user;
@@ -64,6 +112,19 @@ router.post('/cities/plans', (req, res, next) => {
   tripBudget = budget;
 
   Travel.find({ $and: [{city: cityId}, {days: {$size: numberDays}}, {budget: tripBudget}, {tags: {$all: arrTagsWanted}}, {tags: {$nin: arrTagsNotWanted}}] })
+    .populate('city')
+    .populate('user')
+    .then(plans => {
+      let dataPayload = {plans, currentUser};
+      res.render('plans', dataPayload)
+    })
+    .catch(err => console.log(err));
+});
+
+
+router.get('/plans', (req, res, next) => {
+  const currentUser = req.user
+  Travel.find({})
     .populate('city')
     .populate('user')
     .then(plans => {
@@ -87,6 +148,7 @@ router.get('/plans/:id/details', (req, res, next) => {
     })
     .catch(err => console.log(err));
 });
+
 
 router.get('/plans/details/api', (req, res, next) => {
 Travel.findById(idDetails)

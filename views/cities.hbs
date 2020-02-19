@@ -17,14 +17,21 @@
                         </div>
                     </div>
                     <div class="content">{{this.description}}</div>
-                    <form action="/cities/plans" method="POST">
-                        <input id='days' type="hidden" name='days' value={{../searchParams.days}}>
-                        <input id='budget' type="hidden" name='budget' value={{../searchParams.budget}}>
-                        <input id='tagsWanted' type="hidden" name='tagsWanted' value={{../searchParams.tagsWanted}}>
-                        <input id='tagsNotWanted' type="hidden" name='tagsNotWanted' value={{../searchParams.tagsNotWanted}}>
-                        <input id='cityId' type="hidden" name='cityId' value={{this._id}}>
-                        <button class="button is-medium is-primary is-fullwidth">View Plans</button>
-                    </form>
+
+                    {{#if ../searchParams}}
+                        <form action="/cities/plans" method="POST">
+                            <input id='days' type="hidden" name='days' value={{../searchParams.days}}>
+                            <input id='budget' type="hidden" name='budget' value={{../searchParams.budget}}>
+                            <input id='tagsWanted' type="hidden" name='tagsWanted' value={{../searchParams.tagsWanted}}>
+                            <input id='tagsNotWanted' type="hidden" name='tagsNotWanted' value={{../searchParams.tagsNotWanted}}>
+                            <input id='cityId' type="hidden" name='cityId' value={{this._id}}>
+                            <button class="button is-medium is-primary is-fullwidth">View Plans</button>
+                        </form>
+                    {{else}}
+                        <form action="/cities/plans" method="GET">
+                            <a href="/cities/{{this._id}}/plans" class="button is-medium is-primary is-fullwidth">View Plans</a>
+                        </form>
+                    {{/if}}
                 </div>
             </div>   
         </div>
