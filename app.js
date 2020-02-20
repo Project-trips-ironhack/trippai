@@ -12,14 +12,14 @@ const logger       = require('morgan');
 const path         = require('path');
 const session      = require("express-session");
 const passport     = require("passport");
-const googleStrategy = require('passport-google-oauth20').Strategy;
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const MongoStore   = require('connect-mongo')(session);
 const flash        = require("connect-flash");
 const User = require('./models/User');
     
 
 mongoose
-  .connect(`${process.env.DBURL}`, {useNewUrlParser: true, useUnifiedTopology: true})
+  .connect(`${process.env.DBLOCAL}`, {useNewUrlParser: true, useUnifiedTopology: true})
   .then(x => {
     console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
   })
@@ -72,10 +72,8 @@ app.locals.title = 'Trippai - Plan your next trip today';
 
 
 // Passport Google Auth config
-const GoogleStrategy = require("passport-google-oauth20").Strategy;
-
 passport.use(
-  new googleStrategy(
+  new GoogleStrategy(
     {
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
