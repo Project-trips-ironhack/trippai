@@ -254,7 +254,7 @@ router.post('/create', (req, res, next) => {
   // let city = req.body.city.name
   console.log('asdfasdf')
   console.log(newTravel1.city.imgName)
-  axios.get(`https://api.unsplash.com/search/photos?page=1&query=${newTravel1.city.imgName}&client_id=ZPaa5gam1OwKGakApdDsczrWkmdy5bzfHveYQ4uXLv8`) 
+  axios.get(`https://api.unsplash.com/search/photos?page=1&query=${newTravel1.city.imgName}&client_id=${process.env.UNSPLASH_KEY}`) 
   .then((img) => {
     let cityImg;
     if(img.data.results.length === 0) {
