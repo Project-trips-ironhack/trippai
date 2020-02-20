@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const travelSchema = new Schema({
     tags: {
-        type: [String], 
+        type: [String],
         enum: ['cultural', 'relax', 'party'],
         required: true
     },
@@ -17,15 +17,15 @@ const travelSchema = new Schema({
         required: true
     },
     city: {
-        type: Schema.Types.ObjectId,
-        ref: 'City',
-        required: true
+        name: String,
+        country: String,
     },
-    user: {
-        type: Schema.Types.ObjectId,
-        ref: 'User',
-        required: true
-    },
+    user: String,
+    // {
+    //     type: Schema.Types.ObjectId,
+    //     ref: 'User',
+    //     required: true
+    // },
     description: {
         type: String,
         required: true

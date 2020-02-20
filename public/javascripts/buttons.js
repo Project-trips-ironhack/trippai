@@ -16,7 +16,6 @@ document.addEventListener('DOMContentLoaded', () => {
 window.onload = function () {
   tagsButtons.forEach((button) => {
     button.classList.add('nonClickedTags')
-
   })
 }
 
@@ -83,5 +82,3 @@ document.querySelector('#save').addEventListener('click', function () {
   document.getElementById('tagsNotWanted').value = buttonNonClickedTagArr
   removeClicked()
 })
-
-
