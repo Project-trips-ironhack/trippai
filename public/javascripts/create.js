@@ -1,119 +1,15 @@
 const daysSelector = document.getElementById("daysCreate");
 const buttonCreate = document.getElementById("buttonCreate")
-
-let newPlan = {
-    tags: ['party'],
-    budget: '💵',
-    name: 'Not provided',
-    city: {
-        name: 'IRON',
-        country: 'HACK'
-    },
-    user: 'undefined',
-    description: 'Not provided',
-    numberOfDays: 2,
-    days: [{
-        index: 1,
-        breakfast: {
-            place: 'Not provided',
-            address: 'Not provided',
-            position: {
-                lat: 40.4378698,
-                lon: -3.8196207
-            },
-            description: 'Not provided',
-        },
-        morning: [{
-            place: 'Not provided',
-            address: 'Not provided',
-            duration: '30min-1hour',
-            position: {
-                lat: 40.4378698,
-                lon: -3.8196207
-            },
-            description: 'Not provided'
-        }],
-        lunch: {
-            place: 'Not provided',
-            address: 'Not provided',
-            position: {
-                lat: 40.4378698,
-                lon: -3.8196207
-            },
-            description: 'Not provided'
-        },
-        afternoon: [{
-            place: 'Not provided',
-            address: 'Not provided',
-            duration: '30min-1hour',
-            position: {
-                lat: 40.4378698,
-                lon: -3.8196207
-            },
-            description: 'Not provided'
-        }],
-        dinner: {
-            place: 'Not provided',
-            address: 'Not provided',
-            position: {
-                lat: 40.4378698,
-                lon: -3.8196207
-            },
-            description: 'Not provided'
-        }
-    }, {
-        index: 2,
-        breakfast: {
-            place: 'Not provided',
-            address: 'Not provided',
-            position: {
-                lat: 40.4378698,
-                lon: -3.8196207
-            },
-            description: 'Not provided',
-        },
-        morning: [{
-            place: 'Not provided',
-            address: 'Not provided',
-            duration: '30min-1hour',
-            position: {
-                lat: 40.4378698,
-                lon: -3.8196207
-            },
-            description: 'Not provided'
-        }],
-        lunch: {
-            place: 'Not provided',
-            address: 'Not provided',
-            position: {
-                lat: 40.4378698,
-                lon: -3.8196207
-            },
-            description: 'Not provided'
-        },
-        afternoon: [{
-            place: 'Not provided',
-            address: 'Not provided',
-            duration: '30min-1hour',
-            position: {
-                lat: 40.4378698,
-                lon: -3.8196207
-            },
-            description: 'Not provided'
-        }],
-        dinner: {
-            place: 'Not provided',
-            address: 'Not provided',
-            position: {
-                lat: 40.4378698,
-                lon: -3.8196207
-            },
-            description: 'Not provided'
-        }
-    }]
-};
+const userId = document.getElementById("currentUserId")
+// let tagsButtons = [...document.querySelectorAll('.tags')]
+// let buttonClickedTagsArr = []
 
 
+buttonCreate.addEventListener("click", function (e) {
+    let btnArrTags = [...document.querySelectorAll('.clickedTags')]
+    let days = []
+    let day
+});
 
 buttonCreate.addEventListener("click", function (e) {
     let btnArrTags = [...document.querySelectorAll('.clickedTags')]
@@ -206,14 +102,13 @@ buttonCreate.addEventListener("click", function (e) {
 })
 
 
-
-if(daysSelector){
-    daysSelector.addEventListener("change", function(e) {
-      e.preventDefault();
-      let tabsList = document.querySelector(".tabs ul");
-      let contentsDiv = document.querySelector("#contentsDiv");
-      generateTab(daysSelector.value, tabsList, contentsDiv);
-      tabsWithContent()
+if (daysSelector) {
+    daysSelector.addEventListener("change", function (e) {
+        e.preventDefault();
+        let tabsList = document.querySelector(".tabs ul");
+        let contentsDiv = document.querySelector("#contentsDiv");
+        generateTab(daysSelector.value, tabsList, contentsDiv);
+        tabsWithContent()
     });
 }
 
@@ -223,11 +118,11 @@ function initAutocomplete() {
     let inputCity = document.getElementById('cityName');
     let searchBox = new google.maps.places.SearchBox(inputCity);
 
-    searchBox.addListener('places_changed', function() {
+    searchBox.addListener('places_changed', function () {
         let places = searchBox.getPlaces();
-    
+
         if (places.length == 0) {
-          return;
+            return;
         }
 
         places.forEach(place => {
@@ -300,14 +195,17 @@ function tabsWithContent() {
 
 };
 
-function generateTab(number, menuContainer, divsContainer) {  
-     document.querySelectorAll(".day-item").forEach(item =>{
-      item.innerHTML=""
-     } )
-  for(let i = 1; i <=number; i++) {
-  let link = `<li class="day-item"><a>Day ${i} </a></li>`;
-  menuContainer.innerHTML += link;
-  let tab = `<section class="day-item tab-content"> Day ${i}
+
+
+function generateTab(number, menuContainer, divsContainer) {
+    document.querySelectorAll(".day-item").forEach(item => {
+        item.innerHTML = ""
+    })
+    console.log("ola");
+    for (let i = 1; i <= number; i++) {
+        let link = `<li class="day-item"><a>Day ${i} </a></li>`;
+        menuContainer.innerHTML += link;
+        let tab = `<section class="day-item tab-content"> Day ${i}
   <div>
       <div class="columns"> 
           <div class="column">
@@ -472,6 +370,5 @@ function generateTab(number, menuContainer, divsContainer) {
 
   placesAutocomplete(); 
 
+
 }
-
-

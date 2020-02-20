@@ -4,7 +4,7 @@
         <div class="field">
             <label class="label">Name</label>
             <div class="control">
-                <input id="travelName1Tab" class="input" type="text" placeholder="Name of the plan">
+                <input id="travelName" class="input" type="text" placeholder="Name of the plan">
             </div>
         </div>
 
@@ -18,21 +18,31 @@
         <div class="field">
             <label class="label">Description</label>
             <div class="control">
-                <textarea id="travelDescription1Tab" class="textarea" placeholder="Describe you plan here"></textarea>
+                <textarea id="travelDescription" class="textarea" placeholder="Describe you plan here"></textarea>
             </div>
         </div>
 
 
         <div class="field">
             <label class="label">Budget</label>
-            <div class="control">
-                <div class="select">
-                    <select id="travelBudget1Tab">
-                        <option selected disabled>Choose</option>
-                        <option value="💵">💵</option>
-                        <option value="💵💵">💵💵</option>
-                        <option value="💵💵💵">💵💵💵</option>
-                    </select>
+            <div class='control'>
+                <div class='container'>Tags</div>
+                <div class="field has-addons">
+                    <p class="control">
+                        <button class="button options tags" value='cultural'>
+                            <span>Cultural</span>
+                        </button>
+                    </p>
+                    <p class="control">
+                        <button class="button options tags" value='party'>
+                            <span>Party</span>
+                        </button>
+                    </p>
+                    <p class="control">
+                        <button class="button options tags" value='relax'>
+                            <span>Relax</span>
+                        </button>
+                    </p>
                 </div>
             </div>
         </div>

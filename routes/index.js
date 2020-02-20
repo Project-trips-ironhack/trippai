@@ -5,6 +5,8 @@ const City = require("../models/City");
 const User = require("../models/User");
 const uploadCloud = require('../configs/cloudinary.js');
 const axios = require('axios');
+
+
 /* GET home page */
 router.get("/", (req, res, next) => {
   const currentUser = req.user;
@@ -234,10 +236,7 @@ router.get("/test2", (req, res, next) => {
   
 });
 
-router.get("/test", (req, res, next) => {
-  // const currentUser = req.user;
-  res.render("create");
-});
+
 
 
 router.get('/create', (req, res, next) => {
@@ -248,6 +247,7 @@ router.get('/create', (req, res, next) => {
 
 router.post('/create', (req, res, next) => {
   let newTravel1 = req.body
+  
   console.log(req.body)
  
     Travel.create(newTravel1)

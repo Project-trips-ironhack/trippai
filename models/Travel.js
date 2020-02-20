@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const travelSchema = new Schema({
     tags: {
-        type: [String], 
+        type: [String],
         enum: ['cultural', 'relax', 'party'],
         required: true
     },
@@ -16,7 +16,7 @@ const travelSchema = new Schema({
         type: String,
         required: true
     },
-     city: {
+    city: {
         name: String,
         country: String,
     },
