@@ -240,4 +240,20 @@ router.get("/test", (req, res, next) => {
 });
 
 
+router.get('/create', (req, res, next) => {
+  const currentUser = req.user;
+  res.render('create', {currentUser});
+})
+
+
+router.post('/create', (req, res, next) => {
+  let newTravel1 = req.body
+  console.log(req.body)
+ 
+    Travel.create(newTravel1)
+      .then(newTravel => console.log(newTravel))
+      .catch(err => console.log(err))
+    
+})
+
 module.exports = router;

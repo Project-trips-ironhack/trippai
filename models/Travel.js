@@ -16,16 +16,16 @@ const travelSchema = new Schema({
         type: String,
         required: true
     },
-    city: {
-        type: Schema.Types.ObjectId,
-        ref: 'City',
-        required: true
+     city: {
+        name: String,
+        country: String,
     },
-    user: {
-        type: Schema.Types.ObjectId,
-        ref: 'User',
-        required: true
-    },
+    user: String,
+    // {
+    //     type: Schema.Types.ObjectId,
+    //     ref: 'User',
+    //     required: true
+    // },
     description: {
         type: String,
         required: true

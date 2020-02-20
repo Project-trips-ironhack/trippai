@@ -30,14 +30,8 @@ function placeRestaurantsInMap(restaurants) {
 
     let days = restaurants.days
 
-    
-
-
     days.forEach((day, idx) => {
             console.log(`${day.breakfast.position.lat} index ${idx}`)
-            
-        
-        
         
             const center = {
                 lat: day.breakfast.position.lat,

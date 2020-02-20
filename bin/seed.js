@@ -10,7 +10,7 @@ const bcryptSalt = 10;
 
 function dbConnect(cb) {
     mongoose
-        .connect(`${process.env.DBURL}`, {
+        .connect(`${process.env.DBLOCAL}`, {
             useNewUrlParser: true,
             useUnifiedTopology: true
         })
