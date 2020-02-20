@@ -1,5 +1,6 @@
 const daysSelector = document.getElementById("daysCreate");
 const buttonCreate = document.getElementById("buttonCreate")
+const userId = document.getElementById("currentUserId")
 
 let newPlan = {
     tags: ['party'],
@@ -9,7 +10,7 @@ let newPlan = {
         name: 'IRON',
         country: 'HACK'
     },
-    user: 'undefined',
+    user: userId.value,
     description: 'Not provided',
     numberOfDays: 2,
     days: [{
@@ -113,9 +114,6 @@ let newPlan = {
     }]
 };
 
-
-
-
 buttonCreate.addEventListener("click", function (e) {
 
     console.log('asdfasfasdffasdf')
@@ -129,13 +127,13 @@ buttonCreate.addEventListener("click", function (e) {
 })
 
 
-if(daysSelector){
-    daysSelector.addEventListener("change", function(e) {
-      e.preventDefault();
-      let tabsList = document.querySelector(".tabs ul");
-      let contentsDiv = document.querySelector("#contentsDiv");
-      generateTab(daysSelector.value, tabsList, contentsDiv);
-      tabsWithContent()
+if (daysSelector) {
+    daysSelector.addEventListener("change", function (e) {
+        e.preventDefault();
+        let tabsList = document.querySelector(".tabs ul");
+        let contentsDiv = document.querySelector("#contentsDiv");
+        generateTab(daysSelector.value, tabsList, contentsDiv);
+        tabsWithContent()
     });
 }
 
@@ -145,11 +143,11 @@ function initAutocomplete() {
     let inputCity = document.getElementById('cityName');
     let searchBox = new google.maps.places.SearchBox(inputCity);
 
-    searchBox.addListener('places_changed', function() {
+    searchBox.addListener('places_changed', function () {
         let places = searchBox.getPlaces();
-    
+
         if (places.length == 0) {
-          return;
+            return;
         }
 
         places.forEach(place => {
@@ -196,14 +194,14 @@ function tabsWithContent() {
 };
 
 function generateTab(number, menuContainer, divsContainer) {
-     document.querySelectorAll(".day-item").forEach(item =>{
-      item.innerHTML=""
-     } )
-  console.log("ola");
-  for(let i = 1; i <=number; i++) {
-  let link = `<li class="day-item"><a>Day ${i} </a></li>`;
-  menuContainer.innerHTML += link;
-  let tab = `<section class="day-item tab-content"> Day ${i}
+    document.querySelectorAll(".day-item").forEach(item => {
+        item.innerHTML = ""
+    })
+    console.log("ola");
+    for (let i = 1; i <= number; i++) {
+        let link = `<li class="day-item"><a>Day ${i} </a></li>`;
+        menuContainer.innerHTML += link;
+        let tab = `<section class="day-item tab-content"> Day ${i}
   <div>
       <div class="columns"> 
           <div class="column">
@@ -364,12 +362,10 @@ function generateTab(number, menuContainer, divsContainer) {
 
   </div>
 </section>`;
-  divsContainer.innerHTML += tab;
+        divsContainer.innerHTML += tab;
 
-  }
+    }
 
 
 
 }
-
-

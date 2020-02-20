@@ -248,6 +248,7 @@ router.get('/create', (req, res, next) => {
 
 router.post('/create', (req, res, next) => {
   let newTravel1 = req.body
+  
   console.log(req.body)
  
     Travel.create(newTravel1)
