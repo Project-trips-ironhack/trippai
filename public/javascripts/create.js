@@ -115,9 +115,85 @@ let newPlan = {
 
 
 
-
 buttonCreate.addEventListener("click", function (e) {
+    let btnArrTags = [...document.querySelectorAll('.clickedTags')]
+    let days = []
+    let day
 
+    btnArrTags.forEach((btn) => {
+        buttonClickedTagsArr.push(btn.value)
+    })
+    debugger
+    // document.getElementById('tagsWanted').value = buttonClickedTagsArr
+
+    for (let i = 1; i <= daysSelector.value; i++) {
+        day = {
+            index: i,
+            breakfast: {
+                place: document.querySelector(`#breakfastPlaceDay${i}`).value,
+                address: document.querySelector(`#breakfastAddressDay${i}`).value,
+                position: {
+                    lat: 40.4378698,
+                    lon: -3.8196207
+                },
+                description: document.querySelector(`#breakfastDescriptionDay${i}`).value,
+            },
+            morning: [{
+                place: document.querySelector(`#morningPlaceDay${i}`).value,
+                address: document.querySelector(`#morningAddressDay${i}`).value,
+                duration: document.querySelector(`#morningTimeDay${i}`).value,
+                position: {
+                    lat: 40.4378698,
+                    lon: -3.8196207
+                },
+                description: document.querySelector(`#morningDescriptionDay${i}`).value
+            }],
+            lunch: {
+                place: document.querySelector(`#lunchPlaceDay${i}`).value,
+                address: document.querySelector(`#lunchAddressDay${i}`).value,
+                position: {
+                    lat: 40.4378698,
+                    lon: -3.8196207
+                },
+                description: document.querySelector(`#lunchDescriptionDay${i}`).value
+            },
+            afternoon: [{
+                place: document.querySelector(`#afternoonPlaceDay${i}`).value,
+                address: document.querySelector(`#afternoonAddressDay${i}`).value,
+                duration: document.querySelector(`#afternoonTimeDay${i}`).value,
+                position: {
+                    lat: 40.4378698,
+                    lon: -3.8196207
+                },
+                description: document.querySelector(`#afternoonDescriptionDay${i}`).value
+            }],
+            dinner: {
+                place: document.querySelector(`#dinnerPlaceDay${i}`).value,
+                address: document.querySelector(`#dinnerAddressDay${i}`).value,
+                position: {
+                    lat: 40.4378698,
+                    lon: -3.8196207
+                },
+                description: document.querySelector(`#dinnerDescriptionDay${i}`).value
+            }
+        }
+        console.log(day)
+        days.push(day)
+
+    }
+    let newPlan = {
+        tags: buttonClickedTagsArr,
+        budget: document.querySelector(`#travelBudget`).value,
+        name: document.querySelector(`#travelName`).value,
+        city: {
+            name: document.querySelector(`#cityName`).value,
+            country: 'HACK'
+        },
+        user: userId.value,
+        description: document.querySelector(`#travelDescription`).value,
+        numberOfDays: daysSelector.value,
+        days: days
+    };
     console.log('asdfasfasdffasdf')
     axios.post('/create', newPlan)
         .then(response => {
@@ -126,7 +202,9 @@ buttonCreate.addEventListener("click", function (e) {
         .catch(error => {
             console.log('Oh No! Error is: ', error);
         })
+    removeClicked()
 })
+
 
 
 if(daysSelector){
@@ -139,9 +217,9 @@ if(daysSelector){
     });
 }
 
+// City search box:
 function initAutocomplete() {
     // Create the search box and link it to the UI element.
-    console.log("entra")
     let inputCity = document.getElementById('cityName');
     let searchBox = new google.maps.places.SearchBox(inputCity);
 
@@ -156,8 +234,35 @@ function initAutocomplete() {
             inputCity.value = place.name;
         });
     });
-
 }
+let arrLat = []
+let arrLon = []
+// Plan search boxes:
+function placesAutocomplete() {
+    let placesInputs = [...document.querySelectorAll('.search-input')];
+    let addresses = [...document.querySelectorAll('.address')];
+    console.log(addresses);
+
+    for(let i = 0; i < placesInputs.length; i++) {
+        let searchBox = new google.maps.places.SearchBox(placesInputs[i]);
+        searchBox.addListener('places_changed', function() {
+            let places = searchBox.getPlaces();
+        
+            if (places.length == 0) {
+            return;
+            }
+    
+            places.forEach(place => {
+                placesInputs[i].value = place.name;
+                addresses[i].value = place.formatted_address;
+                arrLat.push(place.geometry.location.lat());
+            });
+        });
+    }   
+}
+
+
+
 
 function tabsWithContent() {
     let tabs = document.querySelectorAll('.tabs li');
@@ -195,11 +300,10 @@ function tabsWithContent() {
 
 };
 
-function generateTab(number, menuContainer, divsContainer) {
+function generateTab(number, menuContainer, divsContainer) {  
      document.querySelectorAll(".day-item").forEach(item =>{
       item.innerHTML=""
      } )
-  console.log("ola");
   for(let i = 1; i <=number; i++) {
   let link = `<li class="day-item"><a>Day ${i} </a></li>`;
   menuContainer.innerHTML += link;
@@ -212,7 +316,7 @@ function generateTab(number, menuContainer, divsContainer) {
                       <h4>Breakfast</h4>
                       <label class="label">Place</label>
                       <div class="control">
-                          <input id="breakfastPlaceDay${i}" class="input searchInput" type="text"
+                          <input id="breakfastPlaceDay${i}" class="input search-input" type="text"
                               placeholder="Name of the place">
                       </div>
                   </div>
@@ -222,7 +326,7 @@ function generateTab(number, menuContainer, divsContainer) {
                           <span class="icon is-small is-left">
                               <i class="fas fa-city"></i>
                           </span>
-                          <input id="breakfastAddressDay${i}" class="input" type="text"
+                          <input id="breakfastAddressDay${i}" class="input address" type="text"
                               placeholder="Address">
                       </div>
                   </div>
@@ -242,7 +346,7 @@ function generateTab(number, menuContainer, divsContainer) {
                       <h4>Lunch</h4>
                       <label class="label">Place</label>
                       <div class="control">
-                          <input id="lunchPlaceDay${i}" class="input" type="text"
+                          <input id="lunchPlaceDay${i}" class="input search-input" type="text"
                               placeholder="Name of the place">
                       </div>
                   </div>
@@ -252,7 +356,7 @@ function generateTab(number, menuContainer, divsContainer) {
                           <span class="icon is-small is-left">
                               <i class="fas fa-city"></i>
                           </span>
-                          <input id="lunchAddressDay${i}" class="input" type="text"
+                          <input id="lunchAddressDay${i}" class="input address" type="text"
                               placeholder="Address">
                       </div>
                   </div>
@@ -271,7 +375,7 @@ function generateTab(number, menuContainer, divsContainer) {
                       <h4>Dinner</h4>
                       <label class="label">Place</label>
                       <div class="control">
-                          <input id="dinnerPlaceDay${i}" class="input" type="text" placeholder="Name of the place">
+                          <input id="dinnerPlaceDay${i}" class="input search-input" type="text" placeholder="Name of the place">
                       </div>
                   </div>
                   <div class="field">
@@ -280,7 +384,7 @@ function generateTab(number, menuContainer, divsContainer) {
                           <span class="icon is-small is-left">
                               <i class="fas fa-city"></i>
                           </span>
-                          <input id="dinnerAddressDay${i}" class="input" type="text"
+                          <input id="dinnerAddressDay${i}" class="input address" type="text"
                               placeholder="Address">
                       </div>
                   </div>
@@ -299,7 +403,7 @@ function generateTab(number, menuContainer, divsContainer) {
                       <h4>Morning</h4>
                       <label class="label">Place</label>
                       <div class="control">
-                          <input id="morningPlaceDay${i}" class="input" type="text" placeholder="Name of the place">
+                          <input id="morningPlaceDay${i}" class="input search-input" type="text" placeholder="Name of the place">
                       </div>
                   </div>
                   <div class="field">
@@ -314,7 +418,7 @@ function generateTab(number, menuContainer, divsContainer) {
                           <span class="icon is-small is-left">
                               <i class="fas fa-city"></i>
                           </span>
-                          <input id="morningAddressDay${i}" class="input" type="text" placeholder="Address">
+                          <input id="morningAddressDay${i}" class="input address" type="text" placeholder="Address">
                       </div>
                   </div>
                   <div class="field">
@@ -332,7 +436,7 @@ function generateTab(number, menuContainer, divsContainer) {
                       <h4>Afternoon</h4>
                       <label class="label">Place</label>
                       <div class="control">
-                          <input id="afternoonPlaceDay${i}" class="input" type="text" placeholder="Name of the place">
+                          <input id="afternoonPlaceDay${i}" class="input search-input" type="text" placeholder="Name of the place">
                       </div>
                   </div>
                   <div class="field">
@@ -347,7 +451,7 @@ function generateTab(number, menuContainer, divsContainer) {
                           <span class="icon is-small is-left">
                               <i class="fas fa-city"></i>
                           </span>
-                          <input id="afternoonAddressDay${i}" class="input" type="text" placeholder="Address">
+                          <input id="afternoonAddressDay${i}" class="input address" type="text" placeholder="Address">
                       </div>
                   </div>
                   <div class="field">
@@ -359,16 +463,14 @@ function generateTab(number, menuContainer, divsContainer) {
                   </div>
               </div>
           </div>
-
-      </div>
-
-  </div>
-</section>`;
+        </div>
+    </div>
+    </section>`;
   divsContainer.innerHTML += tab;
 
   }
 
-
+  placesAutocomplete(); 
 
 }
 

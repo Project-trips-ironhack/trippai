@@ -20,12 +20,11 @@ const travelSchema = new Schema({
         name: String,
         country: String,
     },
-    user: String,
-    // {
-    //     type: Schema.Types.ObjectId,
-    //     ref: 'User',
-    //     required: true
-    // },
+    user: {
+        type: Schema.Types.ObjectId,
+        ref: 'User',
+        required: true
+    },
     description: {
         type: String,
         required: true
