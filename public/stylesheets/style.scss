@@ -97,9 +97,7 @@ $input-shadow: none;
 .notification {
   padding: 1rem;
 }
-.footer {
-  padding: 0;
-}
+
 .subtitle:not(:last-child) {
   margin-bottom: 1rem;
 }
@@ -166,10 +164,11 @@ $input-shadow: none;
   align-items: center;
   width: 90%;
 }
+
 .footer {
   position: relative;
   bottom: 0;
-    margin: 0 auto;
+  margin: 0 auto;
   padding: 14px 63px 8px 63px;
   margin-bottom: 5px;
 }

@@ -20,6 +20,11 @@ const travelSchema = new Schema({
         name: String,
         country: String,
     },
+    user: {
+        type: Schema.Types.ObjectId,
+        ref: 'User',
+        required: true
+    },
     user: String,
     // {
     //     type: Schema.Types.ObjectId,

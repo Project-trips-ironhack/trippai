@@ -1,4 +1,5 @@
 <div id="newtrip">
+    <input type="hidden" name="currentUserId" id="currentUserId" value="{{currentUser._id}}"></input>
     <div>
         <div class="field">
             <label class="label">Name</label>
@@ -10,13 +11,7 @@
         <div class="field">
             <label class="label">City</label>
             <div class="control">
-                <div class="select">
-                    <select id="travelCity1Tab">
-                        {{#each allCities}}
-                        <option value="{{this._id}}">{{this.name}}</option>
-                        {{/each}}
-                    </select>
-                </div>
+                <input type="text" id="cityName" class="input" placeholder="Search city">
             </div>
 
         </div>
@@ -33,6 +28,7 @@
             <div class="control">
                 <div class="select">
                     <select id="travelBudget1Tab">
+                        <option selected disabled>Choose</option>
                         <option value="💵">💵</option>
                         <option value="💵💵">💵💵</option>
                         <option value="💵💵💵">💵💵💵</option>
@@ -57,14 +53,13 @@
             <div class="control">
                 <div class="select">
                     <select id="daysCreate">
-                        <option value="">0</option>
+                        <option selected disabled>Choose</option>
                         <option value="2">2</option>
                         <option value="5">5</option>
                         <option value="7">7</option>
                     </select>
                 </div>
             </div>
-            </select>
         </div>
     </div>
 
@@ -79,5 +74,16 @@
 
         </div>
     </div>
-
+    <div class="field is-grouped">
+        <div class="control">
+            <button id="buttonCreate" class="button is-link">Submit</button>
+        </div>
+        <div class="control">
+            <button class="button is-link is-light">Cancel</button>
+        </div>
+    </div>
 </div>
+
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBqLcOKC6QYpCGzK4DDxej5_IdaoSHwY_o&libraries=places&"
+    async defer></script>

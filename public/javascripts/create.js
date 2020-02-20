@@ -1,6 +1,6 @@
-// import Axios from "axios";
-
-// import Axios from "axios";
+const daysSelector = document.getElementById("daysCreate");
+const buttonCreate = document.getElementById("buttonCreate")
+const userId = document.getElementById("currentUserId")
 
 let newPlan = {
     tags: ['party'],
@@ -10,7 +10,7 @@ let newPlan = {
         name: 'IRON',
         country: 'HACK'
     },
-    user: 'undefined',
+    user: userId.value,
     description: 'Not provided',
     numberOfDays: 2,
     days: [{
@@ -114,8 +114,6 @@ let newPlan = {
     }]
 };
 
-const buttonCreate = document.getElementById("buttonCreate")
-
 buttonCreate.addEventListener("click", function (e) {
 
     console.log('asdfasfasdffasdf')
@@ -128,19 +126,72 @@ buttonCreate.addEventListener("click", function (e) {
         })
 })
 
-const daysCreate = document.querySelector("#daysCreate")
+
+if (daysSelector) {
+    daysSelector.addEventListener("change", function (e) {
+        e.preventDefault();
+        let tabsList = document.querySelector(".tabs ul");
+        let contentsDiv = document.querySelector("#contentsDiv");
+        generateTab(daysSelector.value, tabsList, contentsDiv);
+        tabsWithContent()
+    });
+}
+
+function initAutocomplete() {
+    // Create the search box and link it to the UI element.
+    console.log("entra")
+    let inputCity = document.getElementById('cityName');
+    let searchBox = new google.maps.places.SearchBox(inputCity);
+
+    searchBox.addListener('places_changed', function () {
+        let places = searchBox.getPlaces();
+
+        if (places.length == 0) {
+            return;
+        }
+
+        places.forEach(place => {
+            inputCity.value = place.name;
+        });
+    });
+
+}
+
+function tabsWithContent() {
+    let tabs = document.querySelectorAll('.tabs li');
+    let tabsContent = document.querySelectorAll('.tab-content');
+
+    let deactvateAllTabs = function () {
+        tabs.forEach(function (tab) {
+            tab.classList.remove('is-active');
+        });
+    };
+
+    let hideTabsContent = function () {
+        tabsContent.forEach(function (tabContent) {
+            tabContent.classList.remove('is-active');
+        });
+    };
+
+    let activateTabsContent = function (tab) {
+        tabsContent[getIndex(tab)].classList.add('is-active');
+    };
+
+    let getIndex = function (el) {
+        return [...el.parentElement.children].indexOf(el);
+    };
+
+    tabs.forEach(function (tab) {
+        tab.addEventListener('click', function () {
+            deactvateAllTabs();
+            hideTabsContent();
+            tab.classList.add('is-active');
+            activateTabsContent(tab);
+        });
+    })
 
 
-daysCreate.addEventListener("change", function (e) {
-    e.preventDefault();
-    let daySelection = document.querySelector("#daysCreate");
-    let tabsList = document.querySelector(".tabs ul");
-    let contentsDiv = document.querySelector("#contentsDiv");
-
-    console.log(daySelection.value)
-
-    generateTab(daySelection.value, tabsList, contentsDiv);
-});
+};
 
 
 
@@ -148,7 +199,7 @@ function generateTab(number, menuContainer, divsContainer) {
     document.querySelectorAll(".day-item").forEach(item => {
         item.innerHTML = ""
     })
-
+    console.log("ola");
     for (let i = 1; i <= number; i++) {
         let link = `<li class="day-item"><a>Day ${i} </a></li>`;
         menuContainer.innerHTML += link;
@@ -317,74 +368,6 @@ function generateTab(number, menuContainer, divsContainer) {
 
     }
 
-    let tabsWithContent = (function () {
-        let tabs = document.querySelectorAll('.tabs li');
-        let tabsContent = document.querySelectorAll('.tab-content');
 
-        let deactvateAllTabs = function () {
-            tabs.forEach(function (tab) {
-                tab.classList.remove('is-active');
-            });
-        };
-
-        let hideTabsContent = function () {
-            tabsContent.forEach(function (tabContent) {
-                tabContent.classList.remove('is-active');
-            });
-        };
-
-        let activateTabsContent = function (tab) {
-            tabsContent[getIndex(tab)].classList.add('is-active');
-        };
-
-        let getIndex = function (el) {
-            return [...el.parentElement.children].indexOf(el);
-        };
-
-        tabs.forEach(function (tab) {
-            tab.addEventListener('click', function () {
-                deactvateAllTabs();
-                hideTabsContent();
-                tab.classList.add('is-active');
-                activateTabsContent(tab);
-            });
-        })
-
-        tabs[0].click();
-    })();
 
 }
-
-
-
-// let content = `<section class="tab-content">Day ${i+1} schedule</section>`;
-// const contentsDiv = document.querySelector('.contentsDiv');
-// contentsDiv.innerHTML += content;
-// document.querySelector('submitDescription').addEventListener('click', () => {
-//     let name = document.getElementById('name').value;
-//     let city = document.getElementById('city').value;
-//     let name = document.getElementById('name').value;
-//     let name = document.getElementById('name').value;
-//     let name = document.getElementById('name').value;
-
-//     let tabsCreation;
-
-//     const number = document.getElementById('days').value;
-
-//     for(let i = 0; i < numberOfDays; i++) {
-//         let tab = `<li><a>Day ${i+1}</a></li>`;
-//         const tabsList = document.querySelector('.tabs ul');
-//         tabsList.innerHTML += tab;
-
-//         let content = `<section class="tab-content">Day ${i+1} schedule</section>`;
-//         const contentsDiv = document.querySelector('.contentsDiv');
-//         contentsDiv.innerHTML += content;
-//     }
-
-//     name
-//     city
-//     description
-//     budget
-//     type
-//     days (number)
-// });
