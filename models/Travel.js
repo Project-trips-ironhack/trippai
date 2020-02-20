@@ -19,6 +19,8 @@ const travelSchema = new Schema({
     city: {
         name: String,
         country: String,
+        img: String,
+        imgName: String
     },
     user: {
         type: Schema.Types.ObjectId,
