@@ -72,7 +72,7 @@ buttonCreate.addEventListener("click", function (e) {
 
     let nameCity = document.querySelector(`#cityName`).value
     let newPlan = {
-        tags: buttonClickedTagsArr,
+        tags: clickedTags,
         budget: document.querySelector(`#travelBudget`).value,
         name: document.querySelector(`#travelName`).value,
         city: {
