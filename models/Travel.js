@@ -19,6 +19,8 @@ const travelSchema = new Schema({
     city: {
         name: String,
         country: String,
+        img: {type: String, default: 'https://w.wallhaven.cc/full/5d/wallhaven-5do9m7.jpg'},
+        imgName: String
     },
     user: {
         type: Schema.Types.ObjectId,

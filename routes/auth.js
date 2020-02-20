@@ -82,7 +82,7 @@ router.get(
   "/google/callback",
   passport.authenticate("google", {
     successRedirect: "/",
-    failureRedirect: "/signup" // here you would redirect to the login page using traditional login approach
+    failureRedirect: "/auth/signup" // here you would redirect to the login page using traditional login approach
   })
 );
 

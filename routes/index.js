@@ -4,6 +4,7 @@ const Travel = require("../models/Travel");
 const City = require("../models/City");
 const User = require("../models/User");
 const uploadCloud = require('../configs/cloudinary.js');
+const ensureLogin   = require("connect-ensure-login");
 const axios = require('axios');
 
 
@@ -14,11 +15,11 @@ router.get("/", (req, res, next) => {
 });
 
 
+// Show cities:
 router.get('/cities', (req, res, next) => {
   const currentUser = req.user;
 
   Travel.find({})
-  .populate('city')
   .populate('user')
   .then(data => {
     let numberOfTravels = {};
@@ -43,12 +44,15 @@ router.get('/cities', (req, res, next) => {
 
     let dataPayload = {defCities, currentUser};
 
+    console.log(defCities);
+
     res.render('cities', dataPayload);
   })
   .catch(err => console.log(err));
 });
 
 
+// Show cities after params search:
 router.post("/cities", (req, res, next) => {
   const currentUser = req.user;
   const { days, budget, tagsWanted, tagsNotWanted } = req.body;
@@ -58,7 +62,6 @@ router.post("/cities", (req, res, next) => {
   tripBudget = budget;
 
   Travel.find({$and: [ {days: {$size: numberDays}}, {budget: tripBudget}, {tags: {$all: arrTagsWanted}}, {tags: {$nin: arrTagsNotWanted}} ] })
-  .populate('city')
   .populate('user')
   .then(data => {
     let numberOfTravels = {};
@@ -90,11 +93,11 @@ router.post("/cities", (req, res, next) => {
 });
 
 
-router.get('/cities/:id/plans', (req, res, next) => {
+// Show plans by city:
+router.get('/cities/:name/plans', (req, res, next) => {
   const currentUser = req.user;
 
-  Travel.find({city: req.params.id})
-    .populate('city')
+  Travel.find({"city.name": req.params.name})
     .populate('user')
     .then(plans => {
       let dataPayload = {plans, currentUser};
@@ -104,30 +107,31 @@ router.get('/cities/:id/plans', (req, res, next) => {
 });
 
 
+// Show plans after filtering params and selecting city:
 router.post('/cities/plans', (req, res, next) => {
   const currentUser = req.user;
-  const { cityId , days, budget, tagsWanted, tagsNotWanted } = req.body;
+  const { cityName , days, budget, tagsWanted, tagsNotWanted } = req.body;
 
   arrTagsWanted = tagsWanted.split(',');
   arrTagsNotWanted = tagsNotWanted.split(',');
   numberDays = +days;
   tripBudget = budget;
 
-  Travel.find({ $and: [{city: cityId}, {days: {$size: numberDays}}, {budget: tripBudget}, {tags: {$all: arrTagsWanted}}, {tags: {$nin: arrTagsNotWanted}}] })
-    .populate('city')
+  Travel.find({ $and: [{"city.name": cityName}, {days: {$size: numberDays}}, {budget: tripBudget}, {tags: {$all: arrTagsWanted}}, {tags: {$nin: arrTagsNotWanted}}] })
     .populate('user')
     .then(plans => {
       let dataPayload = {plans, currentUser};
+      console.log(plans);
       res.render('plans', dataPayload)
     })
     .catch(err => console.log(err));
 });
 
 
+// Show all plans:
 router.get('/plans', (req, res, next) => {
   const currentUser = req.user
   Travel.find({})
-    .populate('city')
     .populate('user')
     .then(plans => {
       let dataPayload = {plans, currentUser};
@@ -137,12 +141,12 @@ router.get('/plans', (req, res, next) => {
 });
 
 
+// Show details of specific plan:
 let idDetails;
 router.get('/plans/:id/details', (req, res, next) => {
   idDetails = req.params.id
   const currentUser = req.user;
   Travel.findById(idDetails)
-    .populate('city')
     .populate('user')
     .then(planDetails => {
       let dataPayload = {planDetails, currentUser};
@@ -152,25 +156,24 @@ router.get('/plans/:id/details', (req, res, next) => {
 });
 
 
+// This is used by axios request for markers on map:
 router.get('/plans/details/api', (req, res, next) => {
 Travel.findById(idDetails)
-  .populate('city')
   .populate('user')
   .then(data => res.json(data))
   .catch(err => console.log(err));
 });
 
 
+// Show user's profile page:
 router.get('/users/:id', (req, res, next) => {
   const currentUser = req.user;
   User.findById(req.params.id)
   .then(user => {
     let userFound = user
     Travel.find({user: user._id})
-    .populate('city')
   .then(userPlans => {
       let owner;
-      
       currentUser ? 
         userFound.id === currentUser.id 
         ? owner = true 
@@ -184,6 +187,7 @@ router.get('/users/:id', (req, res, next) => {
 });
 
 
+// Update user's profile:
 router.post('/users/:id/edit', uploadCloud.single('user-img'), (req, res, next) => {
   if(req.file) {
     User.findByIdAndUpdate(req.params.id, {$set: {username: req.body.username, email: req.body.email, cityOrigin: req.body.cityOrigin, imgPath: req.file.url}})
@@ -195,6 +199,8 @@ router.post('/users/:id/edit', uploadCloud.single('user-img'), (req, res, next) 
     .catch(err => console.log(err));
   }
 });
+
+
 
 router.get("/test", (req, res, next) => {
   // const currentUser = req.user;
@@ -239,7 +245,7 @@ router.get("/test2", (req, res, next) => {
 
 
 
-router.get('/create', (req, res, next) => {
+router.get('/create', ensureLogin.ensureLoggedIn(), (req, res, next) => {
   const currentUser = req.user;
   res.render('create', {currentUser});
 })

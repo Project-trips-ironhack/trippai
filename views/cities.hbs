@@ -1,5 +1,5 @@
 <div class=" columns is-multiline">
-    
+
     {{#each this.defCities}}
         
         <div class="columnscities column is-half">
@@ -24,12 +24,12 @@
                             <input id='budget' type="hidden" name='budget' value={{../searchParams.budget}}>
                             <input id='tagsWanted' type="hidden" name='tagsWanted' value={{../searchParams.tagsWanted}}>
                             <input id='tagsNotWanted' type="hidden" name='tagsNotWanted' value={{../searchParams.tagsNotWanted}}>
-                            <input id='cityId' type="hidden" name='cityId' value={{this._id}}>
+                            <input id='cityName' type="hidden" name='cityName' value={{this.name}}>
                             <button class="button is-medium is-primary is-fullwidth">View Plans</button>
                         </form>
                     {{else}}
                         <form action="/cities/plans" method="GET">
-                            <a href="/cities/{{this._id}}/plans" class="button is-medium is-primary is-fullwidth">View Plans</a>
+                            <a href="/cities/{{this.name}}/plans" class="button is-medium is-primary is-fullwidth">View Plans</a>
                         </form>
                     {{/if}}
                 </div>
