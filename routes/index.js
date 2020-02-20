@@ -206,7 +206,7 @@ router.get("/test", (req, res, next) => {
   // const currentUser = req.user;
   axios.get('https://restcountries.eu/rest/v2/all')
   .then(allCountries=>{
-   // console.log(allCountries)
+
    let countries = []
 
    
@@ -220,9 +220,6 @@ router.get("/test", (req, res, next) => {
      countries.push(tempCountry) 
     })
     res.render("create", {countries});
-
-
-    //https://restcountries.eu/rest/v2/name/{name}
   })
   
 });
@@ -232,7 +229,7 @@ router.get("/test2", (req, res, next) => {
   // const currentUser = req.user;
     City.find()
     .then(allCities =>{
-      console.log(allCities)
+
       res.render("create",{allCities} )
     })
 
@@ -252,14 +249,30 @@ router.get('/create', ensureLogin.ensureLoggedIn(), (req, res, next) => {
 
 
 router.post('/create', (req, res, next) => {
+  let finalTravel
   let newTravel1 = req.body
-  
-  console.log(req.body)
- 
+  // let city = req.body.city.name
+  console.log('asdfasdf')
+  console.log(newTravel1.city.imgName)
+  axios.get(`https://api.unsplash.com/search/photos?page=1&query=${newTravel1.city.imgName}&client_id=ZPaa5gam1OwKGakApdDsczrWkmdy5bzfHveYQ4uXLv8`) 
+  .then((img) => {
+    let cityImg;
+    if(img.data.results.length === 0) {
+      cityImg = '';
+    }
+    cityImg = img.data.results[0].urls.full
+    console.log(cityImg)
+
+    newTravel1.city.img = cityImg
+
+
     Travel.create(newTravel1)
-      .then(newTravel => console.log(newTravel))
+      .then((newTravel) => {
+        console.log(newTravel._id)
+        res.redirect(`/plans/${newTravel._id}/details`)
+      })
       .catch(err => console.log(err))
-    
+  })
 })
 
 module.exports = router;
