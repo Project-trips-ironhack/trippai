@@ -3,6 +3,7 @@ let daysButtons = [...document.querySelectorAll('.days')]
 let dolarButtons = [...document.querySelectorAll('.dolar')]
 let tagsButtons = [...document.querySelectorAll('.tags')]
 let buttonSearch = document.querySelector('#save')
+let detailsCityName = document.getElementById('cityName')
 let buttonClickedDayArr = ''
 let buttonClickedDolarArr = ''
 let buttonClickedTagsArr = []
@@ -23,7 +24,7 @@ function removeClicked() {
 
 }
 
-if(buttonSearch){
+if (buttonSearch || detailsCityName ) {
   daysButtons.forEach((button, idx, arr) => {
 
     button.addEventListener('click', function (event) {
@@ -51,7 +52,7 @@ if(buttonSearch){
     })
   })
 
-
+  if (buttonSearch) {
   buttonSearch.addEventListener('click', function () {
     let btnArrDays = [...document.querySelectorAll('.clickedDays')]
     let btnArrDolar = [...document.querySelectorAll('.clickedDolar')]
@@ -75,6 +76,7 @@ if(buttonSearch){
     document.getElementById('tagsNotWanted').value = buttonNonClickedTagArr
     removeClicked()
   })
+}
 }
 
 

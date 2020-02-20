@@ -1,121 +1,89 @@
 const daysSelector = document.getElementById("daysCreate");
 const buttonCreate = document.getElementById("buttonCreate")
 const userId = document.getElementById("currentUserId")
+// let tagsButtons = [...document.querySelectorAll('.tags')]
+// let buttonClickedTagsArr = []
 
-let newPlan = {
-    tags: ['party'],
-    budget: '💵',
-    name: 'Not provided',
-    city: {
-        name: 'IRON',
-        country: 'HACK'
-    },
-    user: userId.value,
-    description: 'Not provided',
-    numberOfDays: 2,
-    days: [{
-        index: 1,
-        breakfast: {
-            place: 'Not provided',
-            address: 'Not provided',
-            position: {
-                lat: 40.4378698,
-                lon: -3.8196207
-            },
-            description: 'Not provided',
-        },
-        morning: [{
-            place: 'Not provided',
-            address: 'Not provided',
-            duration: '30min-1hour',
-            position: {
-                lat: 40.4378698,
-                lon: -3.8196207
-            },
-            description: 'Not provided'
-        }],
-        lunch: {
-            place: 'Not provided',
-            address: 'Not provided',
-            position: {
-                lat: 40.4378698,
-                lon: -3.8196207
-            },
-            description: 'Not provided'
-        },
-        afternoon: [{
-            place: 'Not provided',
-            address: 'Not provided',
-            duration: '30min-1hour',
-            position: {
-                lat: 40.4378698,
-                lon: -3.8196207
-            },
-            description: 'Not provided'
-        }],
-        dinner: {
-            place: 'Not provided',
-            address: 'Not provided',
-            position: {
-                lat: 40.4378698,
-                lon: -3.8196207
-            },
-            description: 'Not provided'
-        }
-    }, {
-        index: 2,
-        breakfast: {
-            place: 'Not provided',
-            address: 'Not provided',
-            position: {
-                lat: 40.4378698,
-                lon: -3.8196207
-            },
-            description: 'Not provided',
-        },
-        morning: [{
-            place: 'Not provided',
-            address: 'Not provided',
-            duration: '30min-1hour',
-            position: {
-                lat: 40.4378698,
-                lon: -3.8196207
-            },
-            description: 'Not provided'
-        }],
-        lunch: {
-            place: 'Not provided',
-            address: 'Not provided',
-            position: {
-                lat: 40.4378698,
-                lon: -3.8196207
-            },
-            description: 'Not provided'
-        },
-        afternoon: [{
-            place: 'Not provided',
-            address: 'Not provided',
-            duration: '30min-1hour',
-            position: {
-                lat: 40.4378698,
-                lon: -3.8196207
-            },
-            description: 'Not provided'
-        }],
-        dinner: {
-            place: 'Not provided',
-            address: 'Not provided',
-            position: {
-                lat: 40.4378698,
-                lon: -3.8196207
-            },
-            description: 'Not provided'
-        }
-    }]
-};
 
 buttonCreate.addEventListener("click", function (e) {
+    let btnArrTags = [...document.querySelectorAll('.clickedTags')]
+    let days = []
+    let day
 
+    btnArrTags.forEach((btn) => {
+        buttonClickedTagsArr.push(btn.value)
+    })
+    debugger
+    // document.getElementById('tagsWanted').value = buttonClickedTagsArr
+
+    for (let i = 1; i <= daysSelector.value; i++) {
+        day = {
+            index: i,
+            breakfast: {
+                place: document.querySelector(`#breakfastPlaceDay${i}`).value,
+                address: document.querySelector(`#breakfastAddressDay${i}`).value,
+                position: {
+                    lat: 40.4378698,
+                    lon: -3.8196207
+                },
+                description: document.querySelector(`#breakfastDescriptionDay${i}`).value,
+            },
+            morning: [{
+                place: document.querySelector(`#morningPlaceDay${i}`).value,
+                address: document.querySelector(`#morningAddressDay${i}`).value,
+                duration: document.querySelector(`#morningTimeDay${i}`).value,
+                position: {
+                    lat: 40.4378698,
+                    lon: -3.8196207
+                },
+                description: document.querySelector(`#morningDescriptionDay${i}`).value
+            }],
+            lunch: {
+                place: document.querySelector(`#lunchPlaceDay${i}`).value,
+                address: document.querySelector(`#lunchAddressDay${i}`).value,
+                position: {
+                    lat: 40.4378698,
+                    lon: -3.8196207
+                },
+                description: document.querySelector(`#lunchDescriptionDay${i}`).value
+            },
+            afternoon: [{
+                place: document.querySelector(`#afternoonPlaceDay${i}`).value,
+                address: document.querySelector(`#afternoonAddressDay${i}`).value,
+                duration: document.querySelector(`#afternoonTimeDay${i}`).value,
+                position: {
+                    lat: 40.4378698,
+                    lon: -3.8196207
+                },
+                description: document.querySelector(`#afternoonDescriptionDay${i}`).value
+            }],
+            dinner: {
+                place: document.querySelector(`#dinnerPlaceDay${i}`).value,
+                address: document.querySelector(`#dinnerAddressDay${i}`).value,
+                position: {
+                    lat: 40.4378698,
+                    lon: -3.8196207
+                },
+                description: document.querySelector(`#dinnerDescriptionDay${i}`).value
+            }
+        }
+        console.log(day)
+        days.push(day)
+
+    }
+    let newPlan = {
+        tags: buttonClickedTagsArr,
+        budget: document.querySelector(`#travelBudget`).value,
+        name: document.querySelector(`#travelName`).value,
+        city: {
+            name: document.querySelector(`#cityName`).value,
+            country: 'HACK'
+        },
+        user: userId.value,
+        description: document.querySelector(`#travelDescription`).value,
+        numberOfDays: daysSelector.value,
+        days: days
+    };
     console.log('asdfasfasdffasdf')
     axios.post('/create', newPlan)
         .then(response => {
@@ -124,6 +92,7 @@ buttonCreate.addEventListener("click", function (e) {
         .catch(error => {
             console.log('Oh No! Error is: ', error);
         })
+    removeClicked()
 })
 
 
