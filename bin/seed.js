@@ -188,10 +188,11 @@ dbConnect(() => {
 
 
     Travel.deleteMany()
-        .then(() => {
+        // .then(() => {
 
-            return Travel.create(fakeTravel)
-        })
+        //     return Travel.create(fakeTravel)
+        // })
+        // Travel.create(fakeTravel)
         .then(() => {
 
             console.log('succesfully added the travel to te data')

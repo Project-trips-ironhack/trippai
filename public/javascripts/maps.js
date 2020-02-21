@@ -1,17 +1,13 @@
+let markers = []
+let initialMarker
 let initialCoords = {
         lat: 41.3977381,
         lng: 2.190471916
     },
     myMap
 
-function initMap() {
-    let mapOptions = {
-        center: initialCoords,
-        zoom: 5
-    }
-    myMap = new google.maps.Map(document.querySelector('#plansMap'), mapOptions)
-    getRestaurants()
-}
+
+
 
 
 function getRestaurants() {
@@ -20,15 +16,20 @@ function getRestaurants() {
             const allRestaurants = response.data
             console.log('el array de restaurantes es:', allRestaurants)
             placeRestaurantsInMap(allRestaurants)
+
         })
         .catch(error => console.log(error))
 }
 
 
 function placeRestaurantsInMap(restaurants) {
-    let markers = []
-    let days = restaurants.days
 
+
+    let days = restaurants.days
+    initialMarker = {
+        lat: days[0].breakfast.position.lat,
+        lng: days[0].breakfast.position.lon
+    }
     days.forEach((day, idx) => {
         console.log(`${day.breakfast.position.lat} index ${idx}`)
         // let icon = {
@@ -36,7 +37,8 @@ function placeRestaurantsInMap(restaurants) {
         //     origin: new google.maps.Point(0, 0),
         //     anchor: new google.maps.Point(17, 34),
         //     scaledSize: new google.maps.Size(25, 25)
-        // };
+        // }
+
         const breakfast = {
             lat: day.breakfast.position.lat,
             lng: day.breakfast.position.lon
@@ -95,7 +97,23 @@ function placeRestaurantsInMap(restaurants) {
 
 
     })
+
+
+
 }
+
+function initMap() {
+    let mapOptions = {
+        center: initialCoords,
+        zoom: 10
+    }
+    myMap = new google.maps.Map(document.querySelector('#plansMap'), mapOptions)
+    getRestaurants()
+}
+
+console.log(initialMarker)
+
+
 
 // For each place, get the icon, name and location.
 // var bounds = new google.maps.LatLngBounds();
