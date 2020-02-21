@@ -8,8 +8,15 @@ const ensureLogin   = require("connect-ensure-login");
 const axios = require('axios');
 
 
-/* GET home page */
+// Show landing page:
 router.get("/", (req, res, next) => {
+  const currentUser = req.user;
+  res.render("landing", { layout:false, currentUser });
+});
+
+
+// Show home page:
+router.get("/home", (req, res, next) => {
   const currentUser = req.user;
   res.render("index", { currentUser });
 });
@@ -112,6 +119,8 @@ router.post('/cities/plans', (req, res, next) => {
   const currentUser = req.user;
   const { cityName , days, budget, tagsWanted, tagsNotWanted } = req.body;
 
+  console.log(req.body);
+
   arrTagsWanted = tagsWanted.split(',');
   arrTagsNotWanted = tagsNotWanted.split(',');
   numberDays = +days;
@@ -166,7 +175,7 @@ Travel.findById(idDetails)
 
 
 // Show user's profile page:
-router.get('/users/:id', (req, res, next) => {
+router.get('/users/:id', ensureLogin.ensureLoggedIn(), (req, res, next) => {
   const currentUser = req.user;
   User.findById(req.params.id)
   .then(user => {
@@ -179,7 +188,12 @@ router.get('/users/:id', (req, res, next) => {
         ? owner = true 
         : owner = false 
       : owner = false
-      let dataPayload = {userFound, userPlans, currentUser, owner};
+      let dataPayload;
+      if(userPlans.length === 0) {
+        dataPayload = {userFound, currentUser, owner};
+      } else {
+        dataPayload = {userFound, userPlans, currentUser, owner};
+      }
       res.render('profile', dataPayload)
     });
   })
@@ -188,7 +202,7 @@ router.get('/users/:id', (req, res, next) => {
 
 
 // Update user's profile:
-router.post('/users/:id/edit', uploadCloud.single('user-img'), (req, res, next) => {
+router.post('/users/:id/edit', ensureLogin.ensureLoggedIn(), uploadCloud.single('user-img'), (req, res, next) => {
   if(req.file) {
     User.findByIdAndUpdate(req.params.id, {$set: {username: req.body.username, email: req.body.email, cityOrigin: req.body.cityOrigin, imgPath: req.file.url}})
     .then(res.redirect(`/users/${req.user.id}`))
@@ -200,6 +214,19 @@ router.post('/users/:id/edit', uploadCloud.single('user-img'), (req, res, next) 
   }
 });
 
+
+// Show current user's favorite plans:
+router.get('/users/:id/favorites', ensureLogin.ensureLoggedIn(), (req, res, next) => {
+  const currentUser = req.user;
+  User.findById(req.params.id)
+  .populate('favs')
+  .then(user => {
+    let plans = user.favs;
+    dataPayload = {plans, currentUser};
+    res.render('plans', dataPayload)
+  })
+  .catch(err => console.log(err))
+});
 
 
 router.get("/test", (req, res, next) => {

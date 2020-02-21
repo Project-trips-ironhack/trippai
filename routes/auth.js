@@ -14,7 +14,7 @@ router.get("/login", (req, res, next) => {
 
 
 router.post("/login", passport.authenticate("local", {
-  successRedirect: "/",
+  successRedirect: "/home",
   failureRedirect: "/auth/login",
   failureFlash: true,
   passReqToCallback: true
@@ -53,7 +53,7 @@ router.post("/signup", (req, res, next) => {
 
     newUser.save()
     .then(() => {
-      res.redirect("/");
+      res.redirect("/home");
     })
     .catch(err => {
       res.render("auth/signup", { message: "Something went wrong" });
@@ -64,7 +64,7 @@ router.post("/signup", (req, res, next) => {
 
 router.get("/logout", (req, res) => {
   req.logout();
-  res.redirect("/");
+  res.redirect("/home");
 });
 
 
@@ -81,7 +81,7 @@ router.get(
 router.get(
   "/google/callback",
   passport.authenticate("google", {
-    successRedirect: "/",
+    successRedirect: "/home",
     failureRedirect: "/auth/signup" // here you would redirect to the login page using traditional login approach
   })
 );

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
+		<script src="https://kit.fontawesome.com/637d771c93.js" crossorigin="anonymous"></script>
+		<link rel="stylesheet" href="/stylesheets/landing.css">
+        <title>{{title}}</title>
+  	</head>
+  	
+	<body>
+        <div id="landing-header">
+            <img id="logo" src="/images/logos/logo_without_brand.png" alt="Trippai logo">
+            <h1 class="title is-size-1">Welcome to Trippai !</h1>
+            <a id="view" href="/home" class="button is-primary is-medium">Plan your next trip today</a>
+            {{#if currentUser}}
+            {{else}}
+                <div id="links">
+                    <h5 class="is-size-4"><a href="/auth/login"><i class="fas fa-sign-in-alt"></i> Log In</a></h5>
+                    <h5 class="is-size-5"><a href="/auth/signup"><i class="fas fa-user-plus"></i> Sign Up</a></h5>
+                </div>
+            {{/if}}
+        </div>
+
+        <ul class="slideshow">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+	</body>
+</html>

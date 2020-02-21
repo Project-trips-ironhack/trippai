@@ -1,32 +1,44 @@
-{{#each this.plans}}
-
-{{this.plans}}
-
-    <div class="box card boxplans">
-        <div class="card-content">
-            <div class="media">
-                <div class="media-left">
-                    <figure class="image is-128x128">
-                        <img src={{this.city.img}} alt="Placeholder image">
-                    </figure>
-                </div>
-                <div class="media-content">
-                    <p class="title is-4 "><a href="/plans/{{this._id}}/details">{{this.name}}</a></p>
-                    <p class="subtitle is-8">{{this.city.name}}</p>
-                    <p class="subtitle is-6">{{this.city.country}}</p>
-                    <p class="subtitle is-7">{{this.description}}</p>
-                </div>
-            </div>
-            <div class="content">
-                <a href="/users/{{this.user._id}}" class="tag is-primary is-light is-medium">@{{this.user.username}}</a>
-                {{#each this.tags}}
-                    <span class="tag is-primary is-medium">{{this}}</span>
-                {{/each}}
-                <span class="tag is-primary is-light is-medium">Days: {{this.numberOfDays}}</span>
-                <span class="tag is-primary is-light is-medium">{{this.budget}}</span>
-                <br>
-            </div>
+{{#if this.plans}}
+    <div class="columns">
+        <div class="column is-8 is-offset-2 has-text-centered">
+            <p class="title is-4">These are your favorite plans:</p>
         </div>
     </div>
+    {{#each this.plans}}
 
-{{/each}}
+        <div class="box card boxplans">
+            <div class="card-content">
+                <div class="media">
+                    <div class="media-left">
+                        <figure class="image is-128x128">
+                            <img src={{this.city.img}} alt="Placeholder image">
+                        </figure>
+                    </div>
+                    <div class="media-content">
+                        <p class="title is-4"><a href="/plans/{{this._id}}/details">{{this.name}}</a></p>
+                        <p class="subtitle is-8">{{this.city.name}}</p>
+                        <p class="subtitle is-6">{{this.city.country}}</p>
+                        <p class="subtitle is-7">{{this.description}}</p>
+                    </div>
+                </div>
+                <div class="content">
+                    <a href="/users/{{this.user._id}}" class="tag is-primary is-light is-medium">@{{this.user.username}}</a>
+                    {{#each this.tags}}
+                        <span class="tag is-primary is-medium">{{this}}</span>
+                    {{/each}}
+                    <span class="tag is-primary is-light is-medium">Days: {{this.numberOfDays}}</span>
+                    <span class="tag is-primary is-light is-medium">{{this.budget}}</span>
+                    <br>
+                </div>
+            </div>
+        </div>
+
+    {{/each}}
+{{else}}
+<div class="columns">
+    <div class="column is-8 is-offset-2 has-text-centered">
+        <p class="title is-4">You don't have favorites yet. Explore our plans to find them!</p>
+    </div>
+</div>
+    
+{{/if}}
