@@ -1,47 +1,49 @@
-<form class='formindex' action="/cities" method="post">
-    <div class='container is-vcentered'>
-        <div class='container'>Days</div>
-        <div class="field has-addons">
-            <p class="control">
-                <button class="button options days" value='2'>
-                    <span>2</span>
-                </button>
-            </p>
-            <p class="control">
-                <button class="button options days" value='5'>
-                    <span>5</span>
-                </button>
-            </p>
-            <p class="control">
-                <button class="button options days" value='7'>
-                    <span>7</span>
-                </button>
-            </p>
+<div class="hero-image"> 
+<form class='formindex1 box' action="/cities" method="post">
+    <div class="formindex">
+        <div class='button-search formindex'>
+            <div class='has-text-centered title'>How many days</div>
+            <div class="field has-addons">
+                <p class="control">
+                    <button class="button options days" value='2'>
+                        <span>2</span>
+                    </button>
+                </p>
+                <p class="control">
+                    <button class="button options days" value='5'>
+                        <span>5</span>
+                    </button>
+                </p>
+                <p class="control">
+                    <button class="button options days" value='7'>
+                        <span>7</span>
+                    </button>
+                </p>
+            </div>
         </div>
-    </div>
-    <div class='container'>
-        <div class='container'>How much</div>
-        <div class="field has-addons">
-            <p class="control">
-                <button class="button options dolar" value='💵'>
-                    <span>💵</span>
-                </button>
-            </p>
-            <p class="control">
-                <button class="button options dolar" value='💵💵'>
-                    <span>💵💵</span>
-                </button>
-            </p>
-            <p class="control">
-                <button class="button options dolar" value='💵💵💵'>
-                    <span>💵💵💵</span>
-                </button>
-            </p>
+        <div class='button-search formindex'>
+            <div class='has-text-centered title'>How much money</div>
+            <div class="field has-addons">
+                <p class="control">
+                    <button class="button options dolar" value='💵'>
+                        <span>💵</span>
+                    </button>
+                </p>
+                <p class="control">
+                    <button class="button options dolar" value='💵💵'>
+                        <span>💵💵</span>
+                    </button>
+                </p>
+                <p class="control">
+                    <button class="button options dolar" value='💵💵💵'>
+                        <span>💵💵💵</span>
+                    </button>
+                </p>
+            </div>
         </div>
-    </div>
-    
-    <div class='container'>
-        <div class='container'>Tags</div>
+
+        <div class='button-search formindex'>
+            <div class='has-text-centered title'>Your type of trip</div>
             <div class="field has-addons">
                 <p class="control">
                     <button class="button options tags" value='cultural'>
@@ -60,19 +62,22 @@
                 </p>
             </div>
         </div>
+        <div class='button-search'>
+            <button id='save' class="button is-success">
+                <span class="icon is-small">
+                    <i class="fas fa-check"></i>
+                </span>
+                <span>Search</span>
+            </button>
+        </div>
+    </div>
     </div>
 
-    <div class='container'>
-        <button id='save' class="button is-success">
-            <span class="icon is-small">
-                <i class="fas fa-check"></i>
-            </span>
-            <span>Search</span>
-        </button>
-    </div>
+
 
     <input id='days' type="hidden" name='days' value=''>
     <input id='budget' type="hidden" name='budget' value=''>
     <input id='tagsWanted' type="hidden" name='tagsWanted' value=''>
     <input id='tagsNotWanted' type="hidden" name='tagsNotWanted' value=''>
 </form>
+</div>

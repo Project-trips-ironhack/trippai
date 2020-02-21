@@ -11,7 +11,8 @@ let buttonClickedDolarArr = ''
 let buttonClickedTagsArr = []
 let buttonNonClickedTagArr = []
 
-function addTagsClasses(){
+
+function addTagsClasses() {
   tagsButtons.forEach((button) => {
     button.classList.add('nonClickedTags')
   })
@@ -26,7 +27,7 @@ function removeClicked() {
 
 }
 
-if (buttonSearch || detailsCityName ) {
+if (buttonSearch || detailsCityName) {
   daysButtons.forEach((button, idx, arr) => {
 
     button.addEventListener('click', function (event) {

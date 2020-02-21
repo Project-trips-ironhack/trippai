@@ -1,70 +1,76 @@
 <div id="newtrip">
     <input type="hidden" name="currentUserId" id="currentUserId" value="{{currentUser._id}}"></input>
-    <div>
-        <div class="field">
-            <label class="label">Name</label>
-            <div class="control">
-                <input id="travelName" class="input" type="text" placeholder="Name of the plan">
-            </div>
+    <div class="create-info-wrapper">
+        <div class="create-info-header">
+            <h2 class="title">Travel Info</h2>
+            <button class="button dropdown"><i class="fas fa-caret-down"></i></button>
         </div>
-
-        <div class="field">
-            <label class="label">City</label>
-            <div class="control">
-                <input type="text" id="cityName" class="input" placeholder="Search city">
-            </div>
-
-        </div>
-        <div class="field">
-            <label class="label">Description</label>
-            <div class="control">
-                <textarea id="travelDescription" class="textarea" placeholder="Describe you plan here"></textarea>
-            </div>
-        </div>
-        <div class="field">
-            <label class="label">Budget</label>
-            <div class="control">
-                <div class="select">
-                    <select id="travelBudget">
-                        <option value="💵">💵</option>
-                        <option value="💵💵">💵💵</option>
-                        <option value="💵💵💵">💵💵💵</option>
-                    </select>
+        <div class="create-info-content v3 grv">
+            <div class="field">
+                <label class="label">Name</label>
+                <div class="control">
+                    <input id="travelName" class="input" type="text" placeholder="Name of the plan">
                 </div>
             </div>
-        </div>
-        <div class="field">
-            <label class="label">Type</label>
-            <div class='control'>
-                <div class="field has-addons">
-                    <p class="control">
-                        <button class="button options tags" value='cultural'>
-                            <span>Cultural</span>
-                        </button>
-                    </p>
-                    <p class="control">
-                        <button class="button options tags" value='party'>
-                            <span>Party</span>
-                        </button>
-                    </p>
-                    <p class="control">
-                        <button class="button options tags" value='relax'>
-                            <span>Relax</span>
-                        </button>
-                    </p>
+
+            <div class="field">
+                <label class="label">City</label>
+                <div class="control">
+                    <input type="text" id="cityName" class="input" placeholder="Search city">
+                </div>
+
+            </div>
+            <div class="field">
+                <label class="label">Description</label>
+                <div class="control">
+                    <textarea id="travelDescription" class="textarea" placeholder="Describe you plan here"></textarea>
                 </div>
             </div>
-        </div>
-        <div class="field">
-            <label class="label">Days</label>
-            <div class="control">
-                <div class="select">
-                    <select id="daysCreate">
-                        <option selected disabled>Choose</option>
-                        <option value="2">2</option>
-                        <option value="5">5</option>
-                        <option value="7">7</option>
-                    </select>
+            <div class="field">
+                <label class="label">Budget</label>
+                <div class="control">
+                    <div class="select">
+                        <select id="travelBudget">
+                            <option value="💵">💵</option>
+                            <option value="💵💵">💵💵</option>
+                            <option value="💵💵💵">💵💵💵</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Type</label>
+                <div class='control'>
+                    <div class="field has-addons">
+                        <p class="control">
+                            <button class="button options tags" value='cultural'>
+                                <span>Cultural</span>
+                            </button>
+                        </p>
+                        <p class="control">
+                            <button class="button options tags" value='party'>
+                                <span>Party</span>
+                            </button>
+                        </p>
+                        <p class="control">
+                            <button class="button options tags" value='relax'>
+                                <span>Relax</span>
+                            </button>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Days</label>
+                <div class="control">
+                    <div class="select">
+                        <select id="daysCreate">
+                            <option selected disabled>Choose</option>
+                            <option value="2">2</option>
+                            <option value="5">5</option>
+                            <option value="7">7</option>
+                        </select>
+                    </div>
                 </div>
             </div>
         </div>

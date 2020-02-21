@@ -49,25 +49,25 @@
         <div class="navbar-item">
           <div class="buttons">
             {{#if currentUser}}
-              <a href="/create" class="button is-primary is-light">
-                <strong>Create your plan</strong>
-              </a>
-              <a href="/users/{{currentUser._id}}/favorites" class="button is-primary is-light">
-                <strong>Your favorites</strong>
-              </a>
-              <a href="/users/{{currentUser._id}}" class="button is-primary is-inverted is-outlined">
-                <strong>Logged in as {{currentUser.username}}</strong>
-              </a>
-              <a href="/auth/logout" class="button is-primary is-inverted is-outlined">
-                <strong>Log out</strong>
-              </a>
+            <a href="/create" class="button is-primary is-light">
+              <strong>Create your plan</strong>
+            </a>
+            <a href="/users/{{currentUser._id}}/favorites" class="button is-primary is-light">
+              <strong>Your favorites</strong>
+            </a>
+            <a href="/users/{{currentUser._id}}" class="button is-warning is-outlined">
+              <strong>Logged in as {{currentUser.username}}</strong>
+            </a>
+            <a href="/auth/logout" class="button is-warning is-outlined">
+              <strong>Log out</strong>
+            </a>
             {{else}}
-              <a href="/auth/signup" class="button is-primary is-inverted is-outlined">
-                <strong>Sign Up</strong>
-              </a>
-              <a href="/auth/login" class="button is-light">
-                Log in
-              </a>
+            <a href="/auth/signup" class="button is-warning is-outlined">
+              <strong>Sign Up</strong>
+            </a>
+            <a href="/auth/login" class="button is-light">
+              Log in
+            </a>
             {{/if}}
           </div>
         </div>
@@ -81,7 +81,8 @@
   <footer class="footer">
     <div class="content has-text-centered">
       <p>
-        <strong>Trippai</strong> by <a target="_blank" href="https://github.com/arturogbruno">Arturo</a> & <a target="_blank" href="https://github.com/josemhruiz">Jose</a>.
+        <strong>Trippai</strong> by <a target="_blank" href="https://github.com/arturogbruno">Arturo</a> & <a
+          target="_blank" href="https://github.com/josemhruiz">Jose</a>.
       </p>
     </div>
   </footer>
@@ -91,7 +92,7 @@
   <script src="/javascripts/buttons.js"></script>
   <script src="/javascripts/main.js"></script>
 
-  
+
 
 </body>
 
