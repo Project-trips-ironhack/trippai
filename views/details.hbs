@@ -19,7 +19,8 @@
     <div id="plansMap"></div>
   </div>
 
-  <div class="dayscard notification is-success is-pulled-rigth">
+  <div class="dayscard notification is-success is-pulled-right">
+    <button class="button fav is-pulled-right"><i class="far fa-heart"></i>Add to favs</button>
     <p class="title">Daily schedule</p>
     <p class="subtitle">This is your itinerary for each day</p>
     <div id="tabs-with-content" class="plan-detail">
@@ -43,7 +44,7 @@
                   <p class="title is-3 has-text-centered"> Morning </p>
                   {{#each this.morning}}
                   <p class="title is-4 "></i> {{this.place}}</p>
-                  <p class="subtitle is-6 "><i class="fas fa-clock"></i></i> {{this.duration}}</p>
+                  <p class="subtitle is-6 "><i class="fas fa-clock"></i> {{this.duration}}</p>
                   <p class="subtitle is-5"><i class="fas fa-map-marked-alt"></i> {{this.address}}</p>
                   <p class="subtitle is-6">{{this.description}}</p>
                   {{/each}}
@@ -53,7 +54,7 @@
 
                   {{#each this.afternoon}}
                   <p class="title is-4 "></i> {{this.place}}</p>
-                  <p class="subtitle is-6 "><i class="fas fa-clock"></i></i> {{this.duration}}</p>
+                  <p class="subtitle is-6 "><i class="fas fa-clock"></i> {{this.duration}}</p>
                   <p class="subtitle is-5"><i class="fas fa-map-marked-alt"></i> {{this.address}}</p>
                   <p class="subtitle is-6">{{this.description}}</p>
                   {{/each}}
@@ -83,7 +84,6 @@
                   <p class="subtitle is-7">{{this.dinner.description}}</p>
                 </div>
               </div>
-
             </div>
           </div>
         </section>

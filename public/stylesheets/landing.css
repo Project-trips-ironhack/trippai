@@ -1,0 +1,144 @@
+body {
+  background-color: #000;
+  min-height: 100vh;
+}
+
+#landing-header {
+	z-index: 1;
+	position: relative;
+	text-align: center;
+  padding-top: 30vh;
+  width: 50%;
+  margin: 0 auto;
+}
+
+#landing-header h1 {
+	color: #f2f2f2;
+	text-shadow: 2px 2px 2px #000;
+}
+
+#logo {
+  height: 120px;
+}
+
+#view {
+  box-shadow: 2px 2px 2px rgb(54, 54, 54);
+  margin: 3vh 0 4vh 0;
+}
+
+#links h5 {
+	display: inline;
+	padding: 0 2vw 0 2vw;
+}
+
+#links a {
+	text-decoration: none;
+	color: #f2f2f2;
+	text-shadow: 2px 2px 2px rgb(54, 54, 54);
+}
+
+#links a:hover {
+	color: rgb(94, 206, 179);
+}
+
+.slideshow { 
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	z-index: 0;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.slideshow li { 
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-size: cover;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  opacity: 0;
+  z-index: 0;
+  animation: imageAnimation 100s linear infinite; 
+}
+
+/* We can put the images locally in the public directory/images: */
+.slideshow li:nth-child(1) { 
+  background-image: url("/images/landing/1.jpeg");
+}
+
+.slideshow li:nth-child(2) { 
+  background-image: url("/images/landing/2.jpeg");
+  animation-delay: 10s; 
+}
+
+.slideshow li:nth-child(3) { 
+  background-image: url("/images/landing/3.jpeg");
+  animation-delay: 20s; 
+}
+
+.slideshow li:nth-child(4) { 
+  background-image: url("/images/landing/4.jpeg");
+  animation-delay: 30s; 
+}
+
+.slideshow li:nth-child(5) { 
+  background-image: url("/images/landing/5.jpeg");
+  animation-delay: 40s; 
+}
+
+.slideshow li:nth-child(6) { 
+  background-image: url("/images/landing/6.jpeg");
+  animation-delay: 50s; 
+}
+
+.slideshow li:nth-child(7) { 
+  background-image: url("/images/landing/7.jpeg");
+  animation-delay: 60s; 
+}
+
+.slideshow li:nth-child(8) { 
+  background-image: url("/images/landing/8.jpeg");
+  animation-delay: 70s; 
+}
+
+.slideshow li:nth-child(9) { 
+  background-image: url("/images/landing/9.jpeg");
+  animation-delay: 80s; 
+}
+
+.slideshow li:nth-child(10) { 
+  background-image: url("/images/landing/10.jpeg");
+  animation-delay: 90s; 
+}
+
+@keyframes imageAnimation { 
+  0% { 
+    opacity: 0; 
+    animation-timing-function: ease-in;
+  }
+  5% {
+    opacity: 0.6;
+    animation-timing-function: ease-out;
+  }
+  10% {
+    opacity: 0.6;
+  }
+  15% {
+    opacity: 0;
+  }
+}
+
+/* Older browser support - .no-cssanimations class added by modernizr */
+.no-cssanimations .slideshow li {
+	opacity: 1;
+}
+
+.footer {
+  display: none;
+}
