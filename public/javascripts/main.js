@@ -1,7 +1,7 @@
 window.onload = function () {
     document.querySelector('#plansMap') && initMap()
     document.querySelector('.plan-detail') && tabsWithContent()
-    document.getElementById('cityName') &&  initAutocomplete()
+    document.querySelector('#cityName') &&  initAutocomplete()
     addTagsClasses()
     loadBulma()
 

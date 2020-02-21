@@ -58,20 +58,24 @@
     <div class="column is-8 is-offset-2">
         <p class="title is-4">Plans submitted by {{this.userFound.username}}:</p>
         {{#if userPlans}}
-            {{#each this.userPlans}}
-                <article class="message">
-                    <div class="message-body">
-                        {{#each this.tags}}
-                            <span class="tag is-primary is-medium is-pulled-right">{{this}}</span>
-                        {{/each}}
-                        <span class="tag is-primary is-light is-medium is-pulled-right">{{this.budget}}</span>
-                        <span class="tag is-primary is-light is-medium is-pulled-right">Days: {{this.numberOfDays}}</span>
-                        <p class="is-size-5 has-text-weight-bold"><a href="/plans/{{this._id}}/details">{{this.name}}</a></p>
-                        <p class="is-size-5">{{this.city.name}}</p>
-                        <p>{{this.description}}</p>
-                    </div>
-                </article>
-            {{/each}}
+                {{#each this.userPlans}}
+                    <article class="message">
+                        <div class="message-body">
+                            {{#each this.tags}}
+                                <span class="tag is-primary is-medium is-pulled-right">{{this}}</span>
+                            {{/each}}
+                            <span class="tag is-primary is-light is-medium is-pulled-right">{{this.budget}}</span>
+                            <span class="tag is-primary is-light is-medium is-pulled-right">Days: {{this.numberOfDays}}</span>
+                            <p class="is-size-5 has-text-weight-bold"><a href="/plans/{{this._id}}/details">{{this.name}}</a></p>
+                            <p class="is-size-5">{{this.city.name}}</p>
+                            <p>{{this.description}}</p>
+                            {{#if ../owner}}
+                                <a href="/plans/delete/{{this._id}}" class="button is-small is-danger is-pulled-right"><i class="far fa-trash-alt"></i>Delete plan</a>
+                            {{/if}}
+                        </div>
+                    </article>
+                    <hr>
+                {{/each}}
         {{else}}
             <p class="title is-5">{{this.currentUser.username}} hasn't submitted any plan yet.</p>
         {{/if}}

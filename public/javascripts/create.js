@@ -5,6 +5,7 @@ let country
 
 
 buttonCreate.addEventListener("click", function (e) {
+    e.preventDefault();
     let btnArrTags = [...document.querySelectorAll('.clickedTags')]
     let days = []
     let day
@@ -89,6 +90,8 @@ buttonCreate.addEventListener("click", function (e) {
     axios.post('/create', newPlan)
         .then(response => {
             console.log('post successful and the response is: ', response);
+            console.log(response);
+            window.location.href = `/plans/${response.data}/details`;
         })
         .catch(error => {
             console.log('Oh No! Error is: ', error);

@@ -1,4 +1,5 @@
 <div class="detailstyle">
+  <input type="hidden" id="planId" value="{{this.planDetails._id}}">
   <div class="containermap">
     <div id='phototile' class='columns is-gapless is-marginless'>
       <div class="column">
@@ -10,9 +11,13 @@
         <article class="infocard card notification is-warning">
           <p class="title is-6">City: {{this.planDetails.city.name}}</p>
           <p class="subtitle is-6">Country: {{this.planDetails.city.country}}</p>
-          <p class="subtitle is-6">Language: {{this.planDetails.city.language}}</p>
-          <p class="subtitle is-6">Socket: {{this.planDetails.city.socket}}</p>
-          <p class="subtitle is-6">Currency: {{this.planDetails.city.currency}}</p>
+          <p class="subtitle is-6">Budget: {{this.planDetails.budget}}</p>
+          <p class="subtitle is-6">Tags: 
+            {{#each this.planDetails.tags}}
+                <span class="tag is-primary is-small">{{this}}</span>
+            {{/each}}
+          </p>
+          <p class="subtitle is-6">Submitted by: <a href="/users/{{this.planDetails.user._id}}">{{this.planDetails.user.username}}</a></p>
         </article>
       </div>
     </div>
@@ -20,7 +25,9 @@
   </div>
 
   <div class="dayscard notification is-success is-pulled-right">
-    <button class="button fav is-pulled-right"><i class="far fa-heart"></i>Add to favs</button>
+    {{#if this.currentUser}}
+      <button id="addFav" class="button is-danger is-light is-pulled-right"><i class="far fa-heart"></i>Add to favs</button>
+    {{/if}}
     <p class="title">Daily schedule</p>
     <p class="subtitle">This is your itinerary for each day</p>
     <div id="tabs-with-content" class="plan-detail">
