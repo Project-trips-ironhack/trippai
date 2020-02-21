@@ -8,7 +8,7 @@
         </figure>
       </div>
       <div class="column">
-        <article class="infocard card notification is-warning">
+        <article class="infocard card notification">
           <p class="title is-6">City: {{this.planDetails.city.name}}</p>
           <p class="subtitle is-6">Country: {{this.planDetails.city.country}}</p>
           <p class="subtitle is-6">Budget: {{this.planDetails.budget}}</p>
@@ -24,7 +24,7 @@
     <div id="plansMap"></div>
   </div>
 
-  <div class="dayscard notification is-success is-pulled-right">
+  <div class="dayscard notification is-pulled-right">
     {{#if this.currentUser}}
       <button id="addFav" class="button is-danger is-light is-pulled-right"><i class="far fa-heart"></i>Add to favs</button>
     {{/if}}
