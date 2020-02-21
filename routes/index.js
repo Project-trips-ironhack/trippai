@@ -221,9 +221,9 @@ router.get('/users/:id/favorites', ensureLogin.ensureLoggedIn(), (req, res, next
   User.findById(req.params.id)
   .populate('favs')
   .then(user => {
-    let plans = user.favs;
-    dataPayload = {plans, currentUser};
-    res.render('plans', dataPayload)
+    let favPlans = user.favs;
+    dataPayload = {favPlans, currentUser};
+    res.render('favPlans', dataPayload)
   })
   .catch(err => console.log(err))
 });
