@@ -1,7 +1,10 @@
 const daysSelector = document.getElementById("daysCreate");
 const buttonCreate = document.getElementById("buttonCreate")
 const userId = document.getElementById("currentUserId")
-let country
+let country;
+let infoHeaderDOM = document.querySelector('.create-info-header')
+let infoContentDOM = document.querySelector('.create-info-content')
+let dropDown = document.querySelector('.dropdown')
 
 
 buttonCreate.addEventListener("click", function (e) {
@@ -100,6 +103,7 @@ buttonCreate.addEventListener("click", function (e) {
 if (daysSelector) {
     daysSelector.addEventListener("change", function (e) {
         e.preventDefault();
+        displayInfoToggle(infoHeaderDOM, infoContentDOM, 10)
         let tabsList = document.querySelector(".tabs ul");
         let contentsDiv = document.querySelector("#contentsDiv");
         generateTab(daysSelector.value, tabsList, contentsDiv);
@@ -107,6 +111,25 @@ if (daysSelector) {
     });
 }
 
+if (dropDown) {
+    dropDown.addEventListener('click', () => {
+        infoContentDOM.classList.toggle('hidden')
+        infoHeaderDOM.classList.toggle('dark')
+        infoContentDOM.removeAttribute('style', 'display:block')
+        infoContentDOM.classList.toggle('display-none')
+        console.log('test')
+        // displayInfoToggle(infoContentDOM, infoContentDOM, 1000)
+    })
+}
+
+function displayInfoToggle(headerDOM, contentDOM, time) {
+
+    contentDOM.classList.toggle('hidden')
+    headerDOM.classList.toggle('dark')
+    setTimeout(() => {
+        contentDOM.classList.toggle('display-none')
+    }, time)
+}
 // City search box:
 function initAutocomplete() {
     // Create the search box and link it to the UI element.
@@ -121,16 +144,16 @@ function initAutocomplete() {
         }
 
         let countryFound = null;
-        places[0].address_components.forEach(add =>{   
-            add.types.forEach(type =>{         
-               if(type === "country"){
-                country = add.long_name;
-               } 
+        places[0].address_components.forEach(add => {
+            add.types.forEach(type => {
+                if (type === "country") {
+                    country = add.long_name;
+                }
             })
         })
 
         places.forEach(place => {
-            inputCity.value = place.name; 
+            inputCity.value = place.name;
         });
     });
 }
@@ -144,15 +167,15 @@ function placesAutocomplete() {
     let lonInput = [...document.querySelectorAll('.lon-input')]
     console.log(addresses);
 
-    for(let i = 0; i < placesInputs.length; i++) {
+    for (let i = 0; i < placesInputs.length; i++) {
         let searchBox = new google.maps.places.SearchBox(placesInputs[i]);
-        searchBox.addListener('places_changed', function() {
+        searchBox.addListener('places_changed', function () {
             places = searchBox.getPlaces();
-        
+
             if (places.length == 0) {
-            return;
+                return;
             }
-    
+
             places.forEach(place => {
                 placesInputs[i].value = place.name;
                 addresses[i].value = place.formatted_address;
@@ -161,7 +184,7 @@ function placesAutocomplete() {
                 lonInput[i].value = place.geometry.location.lng()
             });
         });
-    }   
+    }
 }
 
 
@@ -199,7 +222,7 @@ function tabsWithContent() {
             activateTabsContent(tab);
         });
     })
-
+    tabs[0].click();
 
 };
 
@@ -399,11 +422,11 @@ function generateTab(number, menuContainer, divsContainer) {
         </div>
     </div>
     </section>`;
-  divsContainer.innerHTML += tab;
+        divsContainer.innerHTML += tab;
 
-  }
+    }
 
-  placesAutocomplete(); 
+    placesAutocomplete();
 
 
 }

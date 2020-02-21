@@ -9,7 +9,8 @@ let buttonClickedDolarArr = ''
 let buttonClickedTagsArr = []
 let buttonNonClickedTagArr = []
 
-function addTagsClasses(){
+
+function addTagsClasses() {
   tagsButtons.forEach((button) => {
     button.classList.add('nonClickedTags')
   })
@@ -24,7 +25,7 @@ function removeClicked() {
 
 }
 
-if (buttonSearch || detailsCityName ) {
+if (buttonSearch || detailsCityName) {
   daysButtons.forEach((button, idx, arr) => {
 
     button.addEventListener('click', function (event) {
@@ -53,35 +54,31 @@ if (buttonSearch || detailsCityName ) {
   })
 
   if (buttonSearch) {
-  buttonSearch.addEventListener('click', function () {
-    let btnArrDays = [...document.querySelectorAll('.clickedDays')]
-    let btnArrDolar = [...document.querySelectorAll('.clickedDolar')]
-    let btnArrTags = [...document.querySelectorAll('.clickedTags')]
-    let btnArrTagsNonClicked = [...document.querySelectorAll('.nonClickedTags')]
-    btnArrTagsNonClicked.forEach((btn) => {
-      buttonNonClickedTagArr.push(btn.value)
+    buttonSearch.addEventListener('click', function () {
+      let btnArrDays = [...document.querySelectorAll('.clickedDays')]
+      let btnArrDolar = [...document.querySelectorAll('.clickedDolar')]
+      let btnArrTags = [...document.querySelectorAll('.clickedTags')]
+      let btnArrTagsNonClicked = [...document.querySelectorAll('.nonClickedTags')]
+      btnArrTagsNonClicked.forEach((btn) => {
+        buttonNonClickedTagArr.push(btn.value)
+      })
+      btnArrDays.forEach((btn) => {
+        buttonClickedDayArr = +btn.value
+      })
+      btnArrDolar.forEach((btn) => {
+        buttonClickedDolarArr = btn.value
+      })
+      btnArrTags.forEach((btn) => {
+        buttonClickedTagsArr.push(btn.value)
+      })
+      document.getElementById('days').value = buttonClickedDayArr
+      document.getElementById('budget').value = buttonClickedDolarArr
+      document.getElementById('tagsWanted').value = buttonClickedTagsArr
+      document.getElementById('tagsNotWanted').value = buttonNonClickedTagArr
+      removeClicked()
     })
-    btnArrDays.forEach((btn) => {
-      buttonClickedDayArr = +btn.value
-    })
-    btnArrDolar.forEach((btn) => {
-      buttonClickedDolarArr = btn.value
-    })
-    btnArrTags.forEach((btn) => {
-      buttonClickedTagsArr.push(btn.value)
-    })
-    document.getElementById('days').value = buttonClickedDayArr
-    document.getElementById('budget').value = buttonClickedDolarArr
-    document.getElementById('tagsWanted').value = buttonClickedTagsArr
-    document.getElementById('tagsNotWanted').value = buttonNonClickedTagArr
-    removeClicked()
-  })
+  }
 }
-}
-
-
-
-
 
 
 
