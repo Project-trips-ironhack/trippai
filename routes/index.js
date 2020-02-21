@@ -219,12 +219,39 @@ router.post('/users/:id/edit', ensureLogin.ensureLoggedIn(), uploadCloud.single(
 router.get('/users/:id/favorites', ensureLogin.ensureLoggedIn(), (req, res, next) => {
   const currentUser = req.user;
   User.findById(req.params.id)
-  .populate('favs')
+  .populate({
+    path: 'favs',
+    model: 'Travel',
+    populate: {
+      path: 'user',
+      model: 'User'
+    }
+  })
   .then(user => {
     let favPlans = user.favs;
     dataPayload = {favPlans, currentUser};
     res.render('favPlans', dataPayload)
   })
+  .catch(err => console.log(err))
+});
+
+
+// Add favorite plan to user:
+router.post('/addfav', ensureLogin.ensureLoggedIn(), (req, res, next) => {
+  let userId = req.user._id;
+  let planId = req.body.newFav;
+  User.findByIdAndUpdate(userId, { "$push": { favs:  planId} })
+  .then(user => {
+    console.log(user);
+  })
+  .catch(err => console.log(err))
+});
+
+
+// Delete user's plan:
+router.get('/plans/delete/:id', (req, res, user) => {
+  Travel.findByIdAndDelete(req.params.id)
+  .then(res.redirect(`/users/${req.user.id}`))
   .catch(err => console.log(err))
 });
 
@@ -268,27 +295,27 @@ router.get("/test2", (req, res, next) => {
 
 
 
-
+// Show form to create a new plan:
 router.get('/create', ensureLogin.ensureLoggedIn(), (req, res, next) => {
   const currentUser = req.user;
   res.render('create', {currentUser});
 })
 
 
+// Save a new plan to the DB:
 router.post('/create', (req, res, next) => {
-  let finalTravel
   let newTravel1 = req.body
   // let city = req.body.city.name
-  console.log('asdfasdf')
   console.log(newTravel1.city.imgName)
   axios.get(`https://api.unsplash.com/search/photos?page=1&query=${newTravel1.city.imgName}&client_id=${process.env.UNSPLASH_KEY}`) 
   .then((img) => {
     let cityImg;
+    console.log(img.data);
     if(img.data.results.length === 0) {
       cityImg = '';
+    } else {
+      cityImg = img.data.results[0].urls.full;
     }
-    cityImg = img.data.results[0].urls.full
-    console.log(cityImg)
 
     newTravel1.city.img = cityImg
 
@@ -296,7 +323,7 @@ router.post('/create', (req, res, next) => {
     Travel.create(newTravel1)
       .then((newTravel) => {
         console.log(newTravel._id)
-        res.redirect(`/plans/${newTravel._id}/details`)
+        res.json(newTravel._id)
       })
       .catch(err => console.log(err))
   })
