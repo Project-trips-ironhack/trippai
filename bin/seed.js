@@ -10,7 +10,7 @@ const bcryptSalt = 10;
 
 function dbConnect(cb) {
     mongoose
-        .connect(`${process.env.DBLOCAL}`, {
+        .connect(`${process.env.DBURL}`, {
             useNewUrlParser: true,
             useUnifiedTopology: true
         })
@@ -26,7 +26,7 @@ function dbConnect(cb) {
 dbConnect(() => {
     let counter = 0;
 
-    const idCity = Array(6)
+    const cities = Array(6)
         .fill()
         .map(() => {
             return new mongoose.mongo.ObjectId()
@@ -68,19 +68,8 @@ dbConnect(() => {
         .fill()
         .map(() => {
             return {
-                _id: idCity[counter++],
                 name: faker.address.city(),
                 country: faker.address.country(),
-                socket: faker.lorem.word(),
-                currency: faker.finance.currencySymbol(),
-                language: faker.lorem.word(),
-                position: {
-                    lat: faker.address.latitude(),
-                    lon: faker.address.longitude()
-                },
-                img: imgCityArr[randomInt(0, imgCityArr.length - 1)],
-                description: faker.lorem.paragraphs(),
-                total: 0
             }
         })
 
@@ -189,13 +178,14 @@ dbConnect(() => {
                 tags: fakeTags(),
                 budget: dolar[randomInt(0, dolar.length - 1)],
                 name: faker.lorem.words(),
-                city: idCity[randomInt(0, idCity.length - 1)],
+                city: {name: faker.address.city(), country: faker.address.country(), img: imgCityArr[randomInt(0, duration.length - 1)]},
                 user: idUser[randomInt(0, idUser.length - 1)],
                 numberOfDays: daysCounter,
                 days: fakeDays(daysCounter),
                 description: faker.lorem.paragraph()
             }
         })
+
 
     Travel.deleteMany()
         .then(() => {

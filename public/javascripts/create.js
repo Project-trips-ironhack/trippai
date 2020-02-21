@@ -1,7 +1,7 @@
 const daysSelector = document.getElementById("daysCreate");
 const buttonCreate = document.getElementById("buttonCreate")
 const userId = document.getElementById("currentUserId")
-
+let country
 
 
 buttonCreate.addEventListener("click", function (e) {
@@ -72,12 +72,12 @@ buttonCreate.addEventListener("click", function (e) {
 
     let nameCity = document.querySelector(`#cityName`).value
     let newPlan = {
-        tags: buttonClickedTagsArr,
+        tags: clickedTags,
         budget: document.querySelector(`#travelBudget`).value,
         name: document.querySelector(`#travelName`).value,
         city: {
             name: nameCity,
-            country: 'HACK',
+            country: country,
             img: undefined,
             imgName: nameCity.replace(/\s+/g, '+').toLowerCase()
         },
@@ -120,11 +120,21 @@ function initAutocomplete() {
             return;
         }
 
+        let countryFound = null;
+        places[0].address_components.forEach(add =>{   
+            add.types.forEach(type =>{         
+               if(type === "country"){
+                country = add.long_name;
+               } 
+            })
+        })
+
         places.forEach(place => {
-            inputCity.value = place.name;
+            inputCity.value = place.name; 
         });
     });
 }
+
 
 // Plan search boxes:
 function placesAutocomplete() {
@@ -359,8 +369,8 @@ function generateTab(number, menuContainer, divsContainer) {
                           </span>
                           <input id="afternoonAddressDay${i}" class="input address" type="text" placeholder="Address">
                       </div>
-                      <input type="hidden" id="morningLatDay${i}" class='lat-input' value=""></input>
-                      <input type="hidden" id="morningLonDay${i}" class='lon-input' value=""></input>
+                      <input type="hidden" id="afternoonLatDay${i}" class='lat-input' value=""></input>
+                      <input type="hidden" id="afternoonLonDay${i}" class='lon-input' value=""></input>
                   </div>
                   
                   <div class="field">

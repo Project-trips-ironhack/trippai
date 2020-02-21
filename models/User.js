@@ -9,13 +9,17 @@ const userSchema = new Schema({
   role: {type:String, enum:['admin', 'user'], default: 'user'},
   imgName: {type: String, default: 'imagename'},
   imgPath: {type: String, default: 'https://res.cloudinary.com/yelpcampagb/image/upload/v1582053793/nalwlnutebmewn76refa.png'},
-  googleID: String
+  googleID: String,
+  favs: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Travel'
+  }]
 }, {
-  timestamps: {
-    createdAt: 'created_at',
-    updatedAt: 'updated_at'
-  }
-});
+    timestamps: {
+      createdAt: 'created_at',
+      updatedAt: 'updated_at'
+    }
+  });
 
 const User = mongoose.model('User', userSchema);
 module.exports = User;

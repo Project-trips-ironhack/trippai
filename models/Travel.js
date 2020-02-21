@@ -19,7 +19,7 @@ const travelSchema = new Schema({
     city: {
         name: String,
         country: String,
-        img: String,
+        img: {type: String, default: 'https://w.wallhaven.cc/full/5d/wallhaven-5do9m7.jpg'},
         imgName: String
     },
     user: {
@@ -48,7 +48,7 @@ const travelSchema = new Schema({
             address: String,
             duration: {
                 type: String,
-                enum: ['30min-1hour', '1-2 hours', '2-3 hours', '3 or more hours']
+                enum: ['Choose','30min-1hour', '1-2 hours', '2-3 hours', '3 or more hours']
             },
             position: {
                 lat: Number,
@@ -70,7 +70,7 @@ const travelSchema = new Schema({
             address: String,
             duration: {
                 type: String,
-                enum: ['30min-1hour', '1-2 hours', '2-3 hours', '3 or more hours']
+                enum: ['Choose','30min-1hour', '1-2 hours', '2-3 hours', '3 or more hours']
             },
             position: {
                 lat: Number,

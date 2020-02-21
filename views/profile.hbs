@@ -22,20 +22,20 @@
                 <div class="field">
                     <label class="label">Username</label>
                     <div class="control">
-                        <input class="input" type="text" name="username" value={{this.currentUser.username}}>
+                        <input class="input" type="text" name="username" value="{{this.currentUser.username}}">
                     </div>
                 </div>
 
                 <div class="field">
                     <label class="label">Email</label>
                     <div class="control">
-                        <input class="input" type="email" name="email" value={{this.currentUser.email}}>
+                        <input class="input" type="email" name="email" value="{{this.currentUser.email}}">
                     </div>
                 </div>
                 <div class="field">
                     <label class="label">City</label>
                     <div class="control">
-                        <input class="input" type="text" name="cityOrigin" value={{this.currentUser.cityOrigin}}>
+                        <input class="input" type="text" name="cityOrigin" value="{{this.currentUser.cityOrigin}}">
                     </div>
                 </div>
                 <div class="field">
@@ -57,20 +57,23 @@
 <div class="columns userPlans">
     <div class="column is-8 is-offset-2">
         <p class="title is-4">Plans submitted by {{this.userFound.username}}:</p>
-        {{#each this.userPlans}}
-        <article class="message">
-            <div class="message-body">
-                {{#each this.tags}}
-                    <span class="tag is-primary is-medium is-pulled-right">{{this}}</span>
-                {{/each}}
-                <span class="tag is-primary is-light is-medium is-pulled-right">{{this.budget}}</span>
-                <span class="tag is-primary is-light is-medium is-pulled-right">Days: {{this.numberOfDays}}</span>
-                <p class="is-size-5 has-text-weight-bold"><a href="/plans/{{this._id}}/details">{{this.name}}</a></p>
-                <p class="is-size-5">{{this.city.name}}</p>
-                <p>{{this.description}}</p>
-            </div>
-        </article>
-        
-        {{/each}}
+        {{#if userPlans}}
+            {{#each this.userPlans}}
+                <article class="message">
+                    <div class="message-body">
+                        {{#each this.tags}}
+                            <span class="tag is-primary is-medium is-pulled-right">{{this}}</span>
+                        {{/each}}
+                        <span class="tag is-primary is-light is-medium is-pulled-right">{{this.budget}}</span>
+                        <span class="tag is-primary is-light is-medium is-pulled-right">Days: {{this.numberOfDays}}</span>
+                        <p class="is-size-5 has-text-weight-bold"><a href="/plans/{{this._id}}/details">{{this.name}}</a></p>
+                        <p class="is-size-5">{{this.city.name}}</p>
+                        <p>{{this.description}}</p>
+                    </div>
+                </article>
+            {{/each}}
+        {{else}}
+            <p class="title is-5">{{this.currentUser.username}} hasn't submitted any plan yet.</p>
+        {{/if}}
     </div>
 </div>
