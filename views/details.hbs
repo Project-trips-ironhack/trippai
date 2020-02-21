@@ -3,12 +3,12 @@
   <div class="containermap">
     <div id='phototile' class='columns is-gapless is-marginless'>
       <div class="column">
-        <figure class="imagedetails box is-primary">
+        <figure class="imagedetails box is-primary image is-4by3">
           <img src={{this.planDetails.city.img}}>
         </figure>
       </div>
       <div class="column">
-        <article class="infocard card notification is-warning">
+        <article class="infocard card notification">
           <p class="title is-6">City: {{this.planDetails.city.name}}</p>
           <p class="subtitle is-6">Country: {{this.planDetails.city.country}}</p>
           <p class="subtitle is-6">Budget: {{this.planDetails.budget}}</p>
@@ -24,7 +24,7 @@
     <div id="plansMap"></div>
   </div>
 
-  <div class="dayscard notification is-success is-pulled-right">
+  <div class="dayscard notification is-pulled-right">
     {{#if this.currentUser}}
       <button id="addFav" class="button is-danger is-light is-pulled-right"><i class="far fa-heart"></i>Add to favs</button>
     {{/if}}
@@ -45,10 +45,10 @@
           <div class='column'>
             <div class='box'>
 
-              <div class="title is-3 day">
+              <div class="title is-4 day">
                 <div class="dayschedule box">
 
-                  <p class="title is-3 has-text-centered"> Morning </p>
+                  <p class="title is-4 has-text-centered"> Morning </p>
                   {{#each this.morning}}
                   <p class="title is-4 "></i> {{this.place}}</p>
                   <p class="subtitle is-6 "><i class="fas fa-clock"></i> {{this.duration}}</p>
@@ -57,7 +57,7 @@
                   {{/each}}
                 </div>
                 <div class="dayschedule box">
-                  <p class="title is-3 has-text-centered"> Afternoon </p>
+                  <p class="title is-4 has-text-centered"> Afternoon </p>
 
                   {{#each this.afternoon}}
                   <p class="title is-4 "></i> {{this.place}}</p>
@@ -73,19 +73,19 @@
             <div class='box'>
               <div class="">
                 <div class="box">
-                  <p class="title is-3 has-text-centered"> Breakfast </p>
+                  <p class="title is-4 has-text-centered"> Breakfast </p>
                   <p class="title is-4 "><i class="fas fa-utensils"></i> {{this.breakfast.place}}</p>
                   <p class="subtitle is-8"><i class="fas fa-map-marked-alt"></i> {{this.breakfast.address}}</p>
                   <p class="subtitle is-6">{{this.breakfast.description}}</p>
                 </div>
                 <div class="box">
-                  <p class="title is-3 has-text-centered"> Lunch </p>
+                  <p class="title is-4 has-text-centered"> Lunch </p>
                   <p class="title is-4 "><i class="fas fa-utensils"></i> {{this.lunch.place}}</p>
                   <p class="subtitle is-8"><i class="fas fa-map-marked-alt"></i> {{this.lunch.address}}</p>
                   <p class="subtitle is-6">{{this.lunch.description}}</p>
                 </div>
                 <div class="box">
-                  <p class="title is-3 has-text-centered"> Dinner </p>
+                  <p class="title is-4 has-text-centered"> Dinner </p>
                   <p class="title is-4 "><i class="fas fa-utensils"></i> {{this.dinner.place}}</p>
                   <p class="subtitle is-8"><i class="fas fa-map-marked-alt"></i> {{this.dinner.address}}</p>
                   <p class="subtitle is-7">{{this.dinner.description}}</p>
